@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "rec-001",
+    "title": "LAPTOP-0005 (Pahal-ThinkPad-L15): Battery Calibration Needed",
+    "summary": "This mobile device's battery reporting has become inaccurate, causing it to shut down unexpectedly even when the screen shows remaining charge.",
+    "assetId": "LAPTOP-0005",
+    "status": "Medium",
+    "category": "CALIBRATION_REQ",
+    "confidenceScore": "0.68",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Battery calibration readings from the past 30 days",
+      "Power management logs across 1,815 mobile devices",
+      "Manufacturer calibration guidelines"
+    ],
+    "knownLimitations": "Battery calibration works best when the user can leave the device undisturbed for several hours. Active travel schedules may delay the process.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We noticed that the reported battery level changes suddenly and does not match the actual charge remaining."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "An uncalibrated battery can cause sudden shutdowns and reduced productivity for users who rely on the device away from their desk."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend performing a full charge and discharge cycle to recalibrate the battery gauge, which should restore accurate reporting."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Start calibration today",
+        "description": "Send instructions to the user to fully drain and recharge the battery today. No replacement parts are needed.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Start Calibration"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Replace battery instead",
+        "description": "Arrange for a battery replacement if the device is still under warranty or if calibration has failed before.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Request Replacement"
+      }
+    ]
+  },
+  {
+    "id": "rec-002",
+    "title": "WORKSTATION-0008 (Amrita-Mac-Studio): Critical Patch Missing",
+    "summary": "This device is missing 3 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "WORKSTATION-0008",
+    "status": "Review Recommended",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.46",
+    "confidenceLabel": "Review",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,815 similar Windows 10 Enterprise devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 3 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 3 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 15 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 3 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 15 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-003",
+    "title": "SERVER-0005 (Fariq-PowerEdge-R750): Firmware Update Available",
+    "summary": "The firmware that runs this device's hardware is out of date and the manufacturer has released a newer version that fixes known stability and security issues.",
+    "assetId": "SERVER-0005",
+    "status": "Review Recommended",
+    "category": "FIRMWARE_ALERT",
+    "confidenceScore": "0.40",
+    "confidenceLabel": "Review",
+    "dataSources": [
+      "BIOS/UEFI version reported by this device",
+      "Manufacturer firmware release notes for model PowerEdge-R750",
+      "Firmware version comparison across 1,815 similar devices"
+    ],
+    "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "This device is running firmware version 1.12, while the manufacturer's latest tested release is 3.04."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "The newer firmware fixes problems that can cause unexpected crashes and weakens protections that keep the device secure at startup."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend scheduling the firmware update during the next maintenance window because it closes those gaps and improves hardware reliability."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Update firmware now",
+        "description": "Apply the firmware update immediately. The device will reboot once and should be ready within a few minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Update Firmware Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for next maintenance window",
+        "description": "Queue the firmware update for the next planned maintenance window. The device remains on the older firmware until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule Update"
+      }
+    ]
+  },
+  {
+    "id": "rec-004",
+    "title": "LAPTOP-0020 (Jeet-MacBook-Air-13): Storage Health Warning",
+    "summary": "This device is running low on free disk space, which can slow down work and prevent important updates from installing correctly.",
+    "assetId": "LAPTOP-0020",
+    "status": "High Confidence",
+    "category": "MAINTENANCE_REQ",
+    "confidenceScore": "0.87",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Disk usage telemetry for this device over the past 60 days",
+      "Fleet maintenance records covering 1,856 similar Laptop devices",
+      "Support ticket history from the last 12 months"
+    ],
+    "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We found that this device's main drive is more than 88% full, leaving little room for updates or temporary files."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "When disk space drops this low, systems become slow and security updates can fail. Similar devices in your fleet with the same issue generated twice as many support tickets."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend running an automated cleanup to remove old temporary files and cached data, which should free enough space and restore normal performance."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Run cleanup now",
+        "description": "Start the automated cleanup tool immediately to remove temporary and cached files. No restart is required.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Run Cleanup Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Ask user to free space",
+        "description": "Send a polite request to the assigned user to move personal files to cloud storage before the cleanup runs.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Notify User"
+      }
+    ]
+  },
+  {
+    "id": "rec-005",
+    "title": "LAPTOP-0019 (Caleb-Latitude-5430): Critical Patch Missing",
+    "summary": "This device is missing 2 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "LAPTOP-0019",
+    "status": "Medium",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.64",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,856 similar macOS 13.6 devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 2 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 2 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 10 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 2 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 10 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-006",
+    "title": "MOBILE-0005 (Mohini-iPhone-14): Storage Health Warning",
+    "summary": "This device is running low on free disk space, which can slow down work and prevent important updates from installing correctly.",
+    "assetId": "MOBILE-0005",
+    "status": "High Confidence",
+    "category": "MAINTENANCE_REQ",
+    "confidenceScore": "0.94",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Disk usage telemetry for this device over the past 60 days",
+      "Fleet maintenance records covering 1,856 similar Mobile devices",
+      "Support ticket history from the last 12 months"
+    ],
+    "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We found that this device's main drive is more than 79% full, leaving little room for updates or temporary files."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "When disk space drops this low, systems become slow and security updates can fail. Similar devices in your fleet with the same issue generated twice as many support tickets."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend running an automated cleanup to remove old temporary files and cached data, which should free enough space and restore normal performance."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Run cleanup now",
+        "description": "Start the automated cleanup tool immediately to remove temporary and cached files. No restart is required.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Run Cleanup Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Ask user to free space",
+        "description": "Send a polite request to the assigned user to move personal files to cloud storage before the cleanup runs.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Notify User"
+      }
+    ]
+  },
+  {
+    "id": "rec-007",
+    "title": "MOBILE-0009 (Imaran-iPhone-13): Critical Patch Missing",
+    "summary": "This device is missing 5 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "MOBILE-0009",
+    "status": "High Confidence",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.94",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,856 similar iOS 17.1 devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 5 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 5 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 12 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 5 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 12 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-008",
+    "title": "WORKSTATION-0007 (Diya-ThinkStation-P360): Critical Patch Missing",
+    "summary": "This device is missing 5 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "WORKSTATION-0007",
+    "status": "High Confidence",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.96",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,856 similar Windows 10 Enterprise devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 5 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 5 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 20 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 5 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 20 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-009",
+    "title": "LAPTOP-0009 (Rushil-Latitude-5430): Critical Patch Missing",
+    "summary": "This device is missing 4 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "LAPTOP-0009",
+    "status": "Medium",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.67",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,815 similar macOS 13.6 devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 4 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 4 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 10 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 4 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 10 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-010",
+    "title": "MOBILE-0009 (Imaran-iPhone-13): Critical Patch Missing",
+    "summary": "This device is missing 3 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "MOBILE-0009",
+    "status": "Review Recommended",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.56",
+    "confidenceLabel": "Review",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,742 similar iOS 17.1 devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 3 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 3 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 15 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 3 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 15 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-011",
+    "title": "SERVER-0003 (Ekaraj-ProLiant-DL380): Critical Patch Missing",
+    "summary": "This device is missing 2 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "SERVER-0003",
+    "status": "High Confidence",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.99",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,856 similar Windows 11 Pro devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 2 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 2 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 20 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 2 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 20 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-012",
+    "title": "SERVER-0004 (Vedant-ProLiant-DL380): Storage Health Warning",
+    "summary": "This device is running low on free disk space, which can slow down work and prevent important updates from installing correctly.",
+    "assetId": "SERVER-0004",
+    "status": "Medium",
+    "category": "MAINTENANCE_REQ",
+    "confidenceScore": "0.61",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Disk usage telemetry for this device over the past 60 days",
+      "Fleet maintenance records covering 1,856 similar Server devices",
+      "Support ticket history from the last 12 months"
+    ],
+    "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We found that this device's main drive is more than 88% full, leaving little room for updates or temporary files."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "When disk space drops this low, systems become slow and security updates can fail. Similar devices in your fleet with the same issue generated twice as many support tickets."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend running an automated cleanup to remove old temporary files and cached data, which should free enough space and restore normal performance."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Run cleanup now",
+        "description": "Start the automated cleanup tool immediately to remove temporary and cached files. No restart is required.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Run Cleanup Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Ask user to free space",
+        "description": "Send a polite request to the assigned user to move personal files to cloud storage before the cleanup runs.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Notify User"
+      }
+    ]
+  },
+  {
+    "id": "rec-013",
+    "title": "WORKSTATION-0001 (Ekbal-Z4-G4): Storage Health Warning",
+    "summary": "This device is running low on free disk space, which can slow down work and prevent important updates from installing correctly.",
+    "assetId": "WORKSTATION-0001",
+    "status": "Medium",
+    "category": "MAINTENANCE_REQ",
+    "confidenceScore": "0.65",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Disk usage telemetry for this device over the past 60 days",
+      "Fleet maintenance records covering 1,742 similar Workstation devices",
+      "Support ticket history from the last 12 months"
+    ],
+    "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We found that this device's main drive is more than 92% full, leaving little room for updates or temporary files."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "When disk space drops this low, systems become slow and security updates can fail. Similar devices in your fleet with the same issue generated twice as many support tickets."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend running an automated cleanup to remove old temporary files and cached data, which should free enough space and restore normal performance."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Run cleanup now",
+        "description": "Start the automated cleanup tool immediately to remove temporary and cached files. No restart is required.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Run Cleanup Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Ask user to free space",
+        "description": "Send a polite request to the assigned user to move personal files to cloud storage before the cleanup runs.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Notify User"
+      }
+    ]
+  },
+  {
+    "id": "rec-014",
+    "title": "LAPTOP-0010 (Thomas-MacBook-Pro-14): Battery Calibration Needed",
+    "summary": "This mobile device's battery reporting has become inaccurate, causing it to shut down unexpectedly even when the screen shows remaining charge.",
+    "assetId": "LAPTOP-0010",
+    "status": "Medium",
+    "category": "CALIBRATION_REQ",
+    "confidenceScore": "0.66",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Battery calibration readings from the past 30 days",
+      "Power management logs across 1,742 mobile devices",
+      "Manufacturer calibration guidelines"
+    ],
+    "knownLimitations": "Battery calibration works best when the user can leave the device undisturbed for several hours. Active travel schedules may delay the process.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We noticed that the reported battery level changes suddenly and does not match the actual charge remaining."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "An uncalibrated battery can cause sudden shutdowns and reduced productivity for users who rely on the device away from their desk."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend performing a full charge and discharge cycle to recalibrate the battery gauge, which should restore accurate reporting."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Start calibration today",
+        "description": "Send instructions to the user to fully drain and recharge the battery today. No replacement parts are needed.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Start Calibration"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Replace battery instead",
+        "description": "Arrange for a battery replacement if the device is still under warranty or if calibration has failed before.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Request Replacement"
+      }
+    ]
+  },
+  {
+    "id": "rec-015",
+    "title": "MOBILE-0001 (Meghana-iPhone-13): Firmware Update Available",
+    "summary": "The firmware that runs this device's hardware is out of date and the manufacturer has released a newer version that fixes known stability and security issues.",
+    "assetId": "MOBILE-0001",
+    "status": "Review Recommended",
+    "category": "FIRMWARE_ALERT",
+    "confidenceScore": "0.54",
+    "confidenceLabel": "Review",
+    "dataSources": [
+      "BIOS/UEFI version reported by this device",
+      "Manufacturer firmware release notes for model iPhone-13",
+      "Firmware version comparison across 1,815 similar devices"
+    ],
+    "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "This device is running firmware version 3.01, while the manufacturer's latest tested release is 1.15."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "The newer firmware fixes problems that can cause unexpected crashes and weakens protections that keep the device secure at startup."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend scheduling the firmware update during the next maintenance window because it closes those gaps and improves hardware reliability."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Update firmware now",
+        "description": "Apply the firmware update immediately. The device will reboot once and should be ready within a few minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Update Firmware Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for next maintenance window",
+        "description": "Queue the firmware update for the next planned maintenance window. The device remains on the older firmware until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule Update"
+      }
+    ]
+  },
+  {
+    "id": "rec-016",
+    "title": "LAPTOP-0019 (Caleb-Latitude-5430): Battery Calibration Needed",
+    "summary": "This mobile device's battery reporting has become inaccurate, causing it to shut down unexpectedly even when the screen shows remaining charge.",
+    "assetId": "LAPTOP-0019",
+    "status": "Medium",
+    "category": "CALIBRATION_REQ",
+    "confidenceScore": "0.73",
+    "confidenceLabel": "Medium",
+    "dataSources": [
+      "Battery calibration readings from the past 30 days",
+      "Power management logs across 1,856 mobile devices",
+      "Manufacturer calibration guidelines"
+    ],
+    "knownLimitations": "Battery calibration works best when the user can leave the device undisturbed for several hours. Active travel schedules may delay the process.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We noticed that the reported battery level changes suddenly and does not match the actual charge remaining."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "An uncalibrated battery can cause sudden shutdowns and reduced productivity for users who rely on the device away from their desk."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend performing a full charge and discharge cycle to recalibrate the battery gauge, which should restore accurate reporting."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Start calibration today",
+        "description": "Send instructions to the user to fully drain and recharge the battery today. No replacement parts are needed.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Start Calibration"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Replace battery instead",
+        "description": "Arrange for a battery replacement if the device is still under warranty or if calibration has failed before.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Request Replacement"
+      }
+    ]
+  },
+  {
+    "id": "rec-017",
+    "title": "SERVER-0004 (Vedant-ProLiant-DL380): Critical Patch Missing",
+    "summary": "This device is missing 2 security patches released in the last 30 days. Two of them fix vulnerabilities that attackers are actively using right now.",
+    "assetId": "SERVER-0004",
+    "status": "High Confidence",
+    "category": "SECURITY_FLAG",
+    "confidenceScore": "0.89",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Windows Update patch history for this device (last 90 days)",
+      "Microsoft Security Bulletin database — June 2024",
+      "Patch compliance records across 1,647 similar Windows 11 Pro devices in your fleet"
+    ],
+    "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We checked this device's update history and found 2 patches missing that were released between May 15 and June 10, 2024."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "Two of these patches fix security gaps that real attackers are currently exploiting. Devices missing these patches are far more likely to be compromised based on your fleet's own incident history over the past year."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "Applying all 2 patches now brings this device back to full compliance and removes the known risk. The update takes approximately 10 minutes and requires one restart."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Apply all patches now",
+        "description": "Push all 2 missing patches immediately during the next maintenance window. Device will restart once. Estimated downtime: 10 minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Apply Patches Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for tonight",
+        "description": "Queue the patch deployment for 11 PM tonight when the device is less likely to be in active use. Risk remains elevated until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule for Tonight"
+      }
+    ]
+  },
+  {
+    "id": "rec-018",
+    "title": "LAPTOP-0002 (Anvi-Latitude-5430): Firmware Update Available",
+    "summary": "The firmware that runs this device's hardware is out of date and the manufacturer has released a newer version that fixes known stability and security issues.",
+    "assetId": "LAPTOP-0002",
+    "status": "High Confidence",
+    "category": "FIRMWARE_ALERT",
+    "confidenceScore": "0.87",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "BIOS/UEFI version reported by this device",
+      "Manufacturer firmware release notes for model Latitude-5430",
+      "Firmware version comparison across 1,815 similar devices"
+    ],
+    "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "This device is running firmware version 2.04, while the manufacturer's latest tested release is 1.15."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "The newer firmware fixes problems that can cause unexpected crashes and weakens protections that keep the device secure at startup."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend scheduling the firmware update during the next maintenance window because it closes those gaps and improves hardware reliability."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Update firmware now",
+        "description": "Apply the firmware update immediately. The device will reboot once and should be ready within a few minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Update Firmware Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for next maintenance window",
+        "description": "Queue the firmware update for the next planned maintenance window. The device remains on the older firmware until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule Update"
+      }
+    ]
+  },
+  {
+    "id": "rec-019",
+    "title": "SERVER-0003 (Ekaraj-ProLiant-DL380): Storage Health Warning",
+    "summary": "This device is running low on free disk space, which can slow down work and prevent important updates from installing correctly.",
+    "assetId": "SERVER-0003",
+    "status": "High Confidence",
+    "category": "MAINTENANCE_REQ",
+    "confidenceScore": "0.95",
+    "confidenceLabel": "High",
+    "dataSources": [
+      "Disk usage telemetry for this device over the past 60 days",
+      "Fleet maintenance records covering 1,856 similar Server devices",
+      "Support ticket history from the last 12 months"
+    ],
+    "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "We found that this device's main drive is more than 92% full, leaving little room for updates or temporary files."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "When disk space drops this low, systems become slow and security updates can fail. Similar devices in your fleet with the same issue generated twice as many support tickets."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend running an automated cleanup to remove old temporary files and cached data, which should free enough space and restore normal performance."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Run cleanup now",
+        "description": "Start the automated cleanup tool immediately to remove temporary and cached files. No restart is required.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Run Cleanup Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Ask user to free space",
+        "description": "Send a polite request to the assigned user to move personal files to cloud storage before the cleanup runs.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Notify User"
+      }
+    ]
+  },
+  {
+    "id": "rec-020",
+    "title": "SERVER-0010 (Shaurya-ThinkSystem-SR650): Firmware Update Available",
+    "summary": "The firmware that runs this device's hardware is out of date and the manufacturer has released a newer version that fixes known stability and security issues.",
+    "assetId": "SERVER-0010",
+    "status": "Review Recommended",
+    "category": "FIRMWARE_ALERT",
+    "confidenceScore": "0.58",
+    "confidenceLabel": "Review",
+    "dataSources": [
+      "BIOS/UEFI version reported by this device",
+      "Manufacturer firmware release notes for model ThinkSystem-SR650",
+      "Firmware version comparison across 1,742 similar devices"
+    ],
+    "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
+    "reasoningSteps": [
+      {
+        "stepNum": "01",
+        "label": "What we found",
+        "detail": "This device is running firmware version 1.12, while the manufacturer's latest tested release is 2.07."
+      },
+      {
+        "stepNum": "02",
+        "label": "Why it matters",
+        "detail": "The newer firmware fixes problems that can cause unexpected crashes and weakens protections that keep the device secure at startup."
+      },
+      {
+        "stepNum": "03",
+        "label": "What we recommend",
+        "detail": "We recommend scheduling the firmware update during the next maintenance window because it closes those gaps and improves hardware reliability."
+      }
+    ],
+    "options": [
+      {
+        "name": "Option A",
+        "title": "Option A: Update firmware now",
+        "description": "Apply the firmware update immediately. The device will reboot once and should be ready within a few minutes.",
+        "confidence": "Confidence: High",
+        "badgeColor": "tertiary",
+        "actionLabel": "Update Firmware Now"
+      },
+      {
+        "name": "Option B",
+        "title": "Option B: Schedule for next maintenance window",
+        "description": "Queue the firmware update for the next planned maintenance window. The device remains on the older firmware until then.",
+        "confidence": "Confidence: Medium",
+        "badgeColor": "error",
+        "actionLabel": "Schedule Update"
+      }
+    ]
+  }
+]
