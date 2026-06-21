@@ -12,6 +12,8 @@ A premium, transparency-first IT device management dashboard built for the Dell 
 ## Features
 
 - **AI Recommendation Feed**: 20 realistic, domain-aligned recommendations covering security patches, storage health, firmware updates, and system configuration.
+- **Audit Log**: An enterprise-grade table displaying historical logs of AI recommendations and human decisions to bridge the "Accountability gap".
+- **Autonomy Dial**: A global stretch-goal setting that lets administrators control the AI's autonomy level (e.g., "Always Ask Me" vs. "Act & Notify").
 - **Inline AI Transparency**:
   - Confidence indicator with plain-English labels (no raw decimals).
   - Visible reasoning steps.
@@ -84,12 +86,15 @@ python scripts/generate_data.py
 │   └── generate_data.py      # Deterministic dataset generator
 ├── src/
 │   ├── components/           # React UI components
+│   │   ├── AuditLog.tsx
+│   │   ├── AutonomyDial.tsx
 │   │   ├── ConfidenceIndicator.tsx
 │   │   ├── DataSourceChips.tsx
 │   │   ├── HumanControls.tsx
 │   │   ├── LimitationBanner.tsx
 │   │   ├── ReasoningPanel.tsx
-│   │   └── RecommendationCard.tsx
+│   │   ├── RecommendationCard.tsx
+│   │   └── Toast.tsx
 │   ├── utils/
 │   │   └── transparencyHelpers.ts
 │   ├── App.tsx               # Main dashboard layout
