@@ -30,7 +30,7 @@ const getStepConfig = (index: number) => {
       }
     default:
       return {
-        icon: <CheckCircle2 className="w-5 h-5 text-slate-400" />,
+        icon: <CheckCircle2 className="w-5 h-5 text-slate-600 dark:text-slate-400" />,
         bgClass: 'bg-slate-500/10',
         borderClass: 'border-slate-500/20',
         indicatorClass: 'bg-slate-500',
@@ -47,7 +47,7 @@ export function ReasoningPanel({ steps }: ReasoningPanelProps) {
         return (
           <div 
             key={step.stepNum} 
-            className="group relative overflow-hidden rounded-xl border border-white/5 bg-[#171427]/40 p-5 shadow-sm transition-all hover:bg-[#171427]/60 hover:border-white/10"
+            className="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-[#171427]/40 p-5 shadow-sm transition-all hover:bg-white/50 dark:hover:bg-[#171427]/60 hover:border-slate-200 dark:hover:border-white/10"
           >
             <div className={`absolute top-0 left-0 w-1.5 h-full ${config.indicatorClass} opacity-80`} />
             
@@ -57,10 +57,10 @@ export function ReasoningPanel({ steps }: ReasoningPanelProps) {
               </div>
               
               <div className="flex flex-col gap-1.5">
-                <h4 className="text-sm font-bold text-white tracking-wide">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white tracking-wide">
                   {step.label}
                 </h4>
-                <p className="text-sm leading-relaxed text-slate-300">
+                <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
                   {step.detail}
                 </p>
               </div>

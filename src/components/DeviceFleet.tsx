@@ -4,9 +4,11 @@ import type { Device } from '../types'
 
 interface DeviceFleetProps {
   devices: Device[]
+  globalSearchQuery?: string
+  onDeviceClick?: (deviceId: string) => void
 }
 
-export function DeviceFleet({ devices }: DeviceFleetProps) {
+export function DeviceFleet({ devices, globalSearchQuery = '', onDeviceClick }: DeviceFleetProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [filterOS, setFilterOS] = useState('ALL')
   const [sortBy, setSortBy] = useState<'Name' | 'Compliance'>('Name')
@@ -14,8 +16,14 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
   const filteredAndSortedDevices = useMemo(() => {
     return devices
       .filter(device => {
-        const matchesSearch = device.device_name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                              device.assigned_user.toLowerCase().includes(searchQuery.toLowerCase())
+        const query = globalSearchQuery || searchQuery
+        const matchesSearch = device.device_name.toLowerCase().includes(query.toLowerCase()) || 
+                              device.assigned_user.toLowerCase().includes(query.toLowerCase()) ||
+                              device.device_id.toLowerCase().includes(query.toLowerCase()) ||
+                              device.os.toLowerCase().includes(query.toLowerCase()) ||
+                              device.department.toLowerCase().includes(query.toLowerCase()) ||
+                              device.fleet_segment.toLowerCase().includes(query.toLowerCase()) ||
+                              device.antivirus_status.toLowerCase().includes(query.toLowerCase())
         const matchesFilter = filterOS === 'ALL' || device.os === filterOS
         return matchesSearch && matchesFilter
       })
@@ -25,7 +33,7 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
         }
         return a.device_name.localeCompare(b.device_name)
       })
-  }, [devices, searchQuery, filterOS, sortBy])
+  }, [devices, searchQuery, globalSearchQuery, filterOS, sortBy])
 
   const uniqueOS = useMemo(() => Array.from(new Set(devices.map(d => d.os))), [devices])
 
@@ -33,30 +41,32 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
     <div className="flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-300">
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-2">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white">Fleet Management</h1>
-          <p className="mt-2 text-slate-400 font-medium">
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">Fleet Management</h1>
+          <p className="mt-2 text-slate-600 dark:text-slate-400 font-medium">
             Overview of {filteredAndSortedDevices.length} managed endpoint devices
           </p>
         </div>
         
         <div className="flex flex-wrap items-center gap-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search devices or users..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 py-2 bg-[#101010]/50 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-indigo-500/50 w-64"
-            />
-          </div>
+          {!globalSearchQuery && (
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 dark:text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search devices or users..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9 pr-4 py-2 bg-[#F3F1ED] dark:bg-[#101010]/50 border border-slate-200 dark:border-white/10 rounded-lg text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500/50 w-64"
+              />
+            </div>
+          )}
           
-          <div className="flex items-center gap-2 bg-[#101010]/50 border border-white/10 rounded-lg px-3 py-2">
-            <Filter className="w-4 h-4 text-slate-400" />
+          <div className="flex items-center gap-2 bg-[#F3F1ED] dark:bg-[#101010]/50 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2">
+            <Filter className="w-4 h-4 text-slate-600 dark:text-slate-400" />
             <select
               value={filterOS}
               onChange={(e) => setFilterOS(e.target.value)}
-              className="bg-transparent text-sm text-slate-300 focus:outline-none"
+              className="bg-transparent text-sm text-slate-700 dark:text-slate-300 focus:outline-none"
             >
               <option value="ALL">All OS</option>
               {uniqueOS.map(os => (
@@ -65,12 +75,12 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
             </select>
           </div>
           
-          <div className="flex items-center gap-2 bg-[#101010]/50 border border-white/10 rounded-lg px-3 py-2">
-            <ArrowUpDown className="w-4 h-4 text-slate-400" />
+          <div className="flex items-center gap-2 bg-[#F3F1ED] dark:bg-[#101010]/50 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2">
+            <ArrowUpDown className="w-4 h-4 text-slate-600 dark:text-slate-400" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'Name' | 'Compliance')}
-              className="bg-transparent text-sm text-slate-300 focus:outline-none"
+              className="bg-transparent text-sm text-slate-700 dark:text-slate-300 focus:outline-none"
             >
               <option value="Name">Sort by Name</option>
               <option value="Compliance">Sort by Compliance</option>
@@ -81,8 +91,8 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
 
       <div className="glass-panel">
         <div className="glass-surface overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-400">
-            <thead className="border-b border-white/10 bg-[#171427]/50 text-xs uppercase tracking-wider text-slate-300">
+          <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
+            <thead className="border-b border-slate-200 dark:border-white/10 bg-white dark:bg-[#171427]/50 text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300">
               <tr>
                 <th scope="col" className="px-6 py-4 font-medium">Device Name & ID</th>
                 <th scope="col" className="px-6 py-4 font-medium">OS & Type</th>
@@ -97,28 +107,32 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
                 const isPatchWarning = patchPct < 70
 
                 return (
-                  <tr key={device.device_id} className="hover:bg-white/5 transition-colors">
+                  <tr 
+                    key={device.device_id} 
+                    className="hover:bg-white/50 dark:hover:bg-white/5 hover:backdrop-blur-sm transition-all cursor-pointer"
+                    onClick={() => onDeviceClick?.(device.device_id)}
+                  >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="rounded-md bg-white/10 p-2 text-slate-300">
+                        <div className="rounded-md bg-slate-200 dark:bg-white/10 p-2 text-slate-700 dark:text-slate-300">
                           <Monitor className="h-5 w-5" />
                         </div>
                         <div>
-                          <p className="font-bold text-white">{device.device_name}</p>
+                          <p className="font-bold text-slate-900 dark:text-white">{device.device_name}</p>
                           <p className="text-xs text-slate-500">{device.device_id}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="font-medium text-slate-300">{device.os}</p>
+                      <p className="font-medium text-slate-700 dark:text-slate-300">{device.os}</p>
                       <p className="text-xs capitalize text-slate-500">{device.fleet_segment} Segment</p>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="font-medium text-slate-300">{device.assigned_user}</p>
+                      <p className="font-medium text-slate-700 dark:text-slate-300">{device.assigned_user}</p>
                       <p className="text-xs text-slate-500">{device.department}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`font-bold ${isPatchWarning ? 'text-[#F87171]' : 'text-slate-300'}`}>
+                      <span className={`font-bold ${isPatchWarning ? 'text-[#F87171]' : 'text-slate-700 dark:text-slate-300'}`}>
                         {patchPct}%
                       </span>
                     </td>

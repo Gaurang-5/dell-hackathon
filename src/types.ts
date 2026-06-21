@@ -39,6 +39,7 @@ export interface Recommendation {
   options: RecommendationOption[]
   blastRadius?: BlastRadius
   ttlExpiration?: string
+  confidenceScore?: number
 }
 
 export interface ActivityLogEntry {

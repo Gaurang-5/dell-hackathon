@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #EDE9FE;
   --color-secondary: #171427;
@@ -11,10 +13,10 @@
 }
 
 body {
-  background-color: #101010;
-  color: #FFFFFF;
+  @apply bg-[#FDFCF8] dark:bg-[#0B0A12] text-slate-900 dark:text-white;
   font-family: var(--font-sans);
 }
+
 
 /* Premium Dark Scrollbar */
 ::-webkit-scrollbar {
@@ -25,17 +27,17 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  @apply bg-slate-300 dark:bg-white/10;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  @apply bg-slate-400 dark:bg-white/20;
 }
 
 /* Glassy Border Shell */
 .glass-panel {
   position: relative;
-  background: rgba(23, 20, 39, 0.4);
+  @apply bg-white/60 dark:bg-[#171427]/40;
   border-radius: 24px;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -49,7 +51,7 @@ body {
   inset: 0;
   border-radius: 24px;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 100%);
+  @apply bg-gradient-to-br from-black/10 to-transparent dark:from-white/10 dark:to-white/1;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -58,7 +60,7 @@ body {
 }
 
 .glass-surface {
-  background: rgba(16, 16, 16, 0.6);
+  @apply bg-white/80 dark:bg-[#101010]/60;
   border-radius: 23px;
   height: 100%;
 }

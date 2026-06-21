@@ -47,17 +47,17 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
         </div>
       )}
       <div className="glass-surface p-8">
-        <header className="mb-4 flex flex-col justify-between gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-center">
+        <header className="mb-4 flex flex-col justify-between gap-2 border-b border-slate-200 dark:border-white/10 pb-4 sm:flex-row sm:items-center">
           <div className="flex items-center gap-2">
-            <span className="text-base font-bold text-white">
+            <span className="text-base font-bold text-slate-900 dark:text-white">
               {recommendation.assetId}
             </span>
-            <span className="rounded-full bg-white/10 border border-white/5 px-2 py-0.5 text-xs font-bold text-slate-300">
+            <span className="rounded-full bg-slate-200 dark:bg-white/10 border border-slate-200 dark:border-white/5 px-2 py-0.5 text-xs font-bold text-slate-700 dark:text-slate-300">
               {deviceType}
             </span>
           </div>
-          <div className="flex items-center gap-3 text-sm text-slate-400">
-            <span className="rounded-md bg-white/10 border border-white/5 px-2 py-1 font-medium text-slate-300">
+          <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+            <span className="rounded-md bg-slate-200 dark:bg-white/10 border border-slate-200 dark:border-white/5 px-2 py-1 font-medium text-slate-700 dark:text-slate-300">
               {categoryLabel}
             </span>
             <span className="text-slate-500">{formatDate(recommendation.createdAt)}</span>
@@ -65,26 +65,26 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
         </header>
 
         <section className="mb-6">
-          <h2 className="text-xl font-bold leading-tight text-white tracking-tight">
+          <h2 className="text-xl font-bold leading-tight text-slate-900 dark:text-white tracking-tight">
             {recommendation.title}
           </h2>
-          <p className="mt-2 text-sm leading-relaxed text-slate-400">
+          <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
             {recommendation.summary}
           </p>
         </section>
 
-        <div className="mb-6 rounded-2xl border border-white/5 bg-[#101010]/50 p-5 backdrop-blur-sm">
+        <div className="mb-6 rounded-2xl border border-slate-200 dark:border-white/5 bg-[#F3F1ED] dark:bg-[#101010]/50 p-5 backdrop-blur-sm">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-[11px] font-bold uppercase tracking-wider text-[#EDE9FE]/70">
+            <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-[#EDE9FE]/70">
               ✨ Reasoning
             </h3>
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider border border-slate-700/50 px-2 py-0.5 rounded bg-slate-800/30">
+            <span className="text-[10px] text-slate-500 uppercase tracking-wider border border-slate-200 dark:border-slate-700/50 px-2 py-0.5 rounded bg-white dark:bg-slate-800/30">
               Simulated Data (Faker.js)
             </span>
           </div>
 
           <div className="mb-6">
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> AI Confidence Level
             </h4>
             <div className={`rounded-xl border p-5 ${
@@ -103,7 +103,7 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
                       {recommendation.status === 'Medium' ? 'Medium Confidence' : recommendation.status}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                     {recommendation.status === 'High Confidence' 
                       ? 'Based on extensive historical data patterns and precise telemetry matches across similar devices in your fleet.' 
                       : recommendation.status === 'Medium' 
@@ -118,17 +118,17 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
                     <div className={`flex-1 rounded-l-full ${
                       recommendation.status === 'High Confidence' || recommendation.status === 'Medium' || recommendation.status === 'Review Recommended' 
                         ? (recommendation.status === 'High Confidence' ? 'bg-emerald-500' : recommendation.status === 'Medium' ? 'bg-amber-500' : 'bg-indigo-500') 
-                        : 'bg-white/10'
+                        : 'bg-slate-200 dark:bg-white/10'
                     }`}></div>
                     <div className={`flex-1 ${
                       recommendation.status === 'High Confidence' || recommendation.status === 'Medium' 
                         ? (recommendation.status === 'High Confidence' ? 'bg-emerald-500' : 'bg-amber-500') 
-                        : 'bg-white/10'
+                        : 'bg-slate-200 dark:bg-white/10'
                     }`}></div>
                     <div className={`flex-1 rounded-r-full ${
                       recommendation.status === 'High Confidence' 
                         ? 'bg-emerald-500' 
-                        : 'bg-white/10'
+                        : 'bg-slate-200 dark:bg-white/10'
                     }`}></div>
                   </div>
                   <div className="flex justify-between text-[9px] font-bold text-slate-500 uppercase tracking-wider px-1">
@@ -154,15 +154,15 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
               </div>
               <p className="text-sm text-red-200/80 mb-3">{recommendation.blastRadius.description}</p>
               <div className="flex flex-wrap gap-4">
-                <div className="bg-[#101010]/50 rounded-lg p-2 border border-red-500/10 flex-1">
+                <div className="bg-[#F3F1ED] dark:bg-[#101010]/50 rounded-lg p-2 border border-red-500/10 flex-1">
                   <div className="text-[10px] uppercase text-red-400/70 font-bold mb-1">Impact Level</div>
                   <div className="text-sm font-bold text-red-300">{recommendation.blastRadius.impactLevel}</div>
                 </div>
-                <div className="bg-[#101010]/50 rounded-lg p-2 border border-red-500/10 flex-1">
+                <div className="bg-[#F3F1ED] dark:bg-[#101010]/50 rounded-lg p-2 border border-red-500/10 flex-1">
                   <div className="text-[10px] uppercase text-red-400/70 font-bold mb-1">Est. Downtime</div>
                   <div className="text-sm font-bold text-red-300">{recommendation.blastRadius.estimatedDowntime}</div>
                 </div>
-                <div className="bg-[#101010]/50 rounded-lg p-2 border border-red-500/10 min-w-[200px] flex-1">
+                <div className="bg-[#F3F1ED] dark:bg-[#101010]/50 rounded-lg p-2 border border-red-500/10 min-w-[200px] flex-1">
                   <div className="text-[10px] uppercase text-red-400/70 font-bold mb-1">Dependent Systems</div>
                   <div className="text-sm font-bold text-red-300">{recommendation.blastRadius.dependentSystems.join(', ')}</div>
                 </div>
@@ -172,14 +172,14 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
 
           <LimitationBanner limitations={recommendation.knownLimitations} />
           
-          <div className="mt-4 pt-4 border-t border-white/5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">AI Data Sources</h4>
+          <div className="mt-4 pt-4 border-t border-slate-200 dark:border-white/5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">AI Data Sources</h4>
             <DataSourceChips sources={recommendation.dataSources} />
           </div>
         </div>
       </div>
 
-      <footer className="mt-8 pt-6 border-t border-white/10">
+      <footer className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
         <HumanControls
           options={recommendation.options}
           assetId={recommendation.assetId}
