@@ -178,7 +178,7 @@ function App() {
           {/* Main Nav */}
           <nav className="space-y-1.5 font-medium text-sm flex-1">
             <button
-              onClick={() => setCurrentView('analytics')}
+              onClick={() => { setCurrentView('analytics'); setSelectedDeviceId(null); }}
               className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 currentView === 'analytics' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
               }`}
@@ -187,7 +187,7 @@ function App() {
               Dashboard
             </button>
             <button
-              onClick={() => setCurrentView('dashboard')}
+              onClick={() => { setCurrentView('dashboard'); setSelectedDeviceId(null); }}
               className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 currentView === 'dashboard' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
               }`}
@@ -196,7 +196,7 @@ function App() {
               Command Center
             </button>
             <button
-              onClick={() => setCurrentView('summary')}
+              onClick={() => { setCurrentView('summary'); setSelectedDeviceId(null); }}
               className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 currentView === 'summary' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
               }`}
@@ -205,7 +205,7 @@ function App() {
               Leadership Summary
             </button>
             <button
-              onClick={() => setCurrentView('devices')}
+              onClick={() => { setCurrentView('devices'); setSelectedDeviceId(null); }}
               className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 currentView === 'devices' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
               }`}
@@ -214,7 +214,7 @@ function App() {
               Device Fleet
             </button>
             <button
-              onClick={() => setCurrentView('events')}
+              onClick={() => { setCurrentView('events'); setSelectedDeviceId(null); }}
               className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 currentView === 'events' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
               }`}
@@ -228,7 +228,7 @@ function App() {
               )}
             </button>
             <button
-              onClick={() => setCurrentView('audit')}
+              onClick={() => { setCurrentView('audit'); setSelectedDeviceId(null); }}
               className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                 currentView === 'audit' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
               }`}
@@ -305,7 +305,7 @@ function App() {
                   <div className="p-2">
                     <p className="text-[10px] font-bold text-slate-500 uppercase px-2 mb-1">AI Recommendations</p>
                     {globalSearchResults.recs.map(r => (
-                      <button key={r.id} onClick={() => { setCurrentView('dashboard'); setSelectedRecId(r.id); setShowSearchDropdown(false); }} className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm text-slate-700 dark:text-slate-300">
+                      <button key={r.id} onClick={() => { setCurrentView('dashboard'); setSelectedRecId(r.id); setShowSearchDropdown(false); setSelectedDeviceId(null); }} className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm text-slate-700 dark:text-slate-300">
                         {r.title} <span className="text-[10px] text-slate-500 block">{r.assetId}</span>
                       </button>
                     ))}
@@ -315,7 +315,7 @@ function App() {
                   <div className="p-2">
                     <p className="text-[10px] font-bold text-slate-500 uppercase px-2 mb-1">Security Events</p>
                     {globalSearchResults.events.map(e => (
-                      <button key={e.event_id} onClick={() => { setCurrentView('events'); setShowSearchDropdown(false); }} className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm text-slate-700 dark:text-slate-300">
+                      <button key={e.event_id} onClick={() => { setCurrentView('events'); setShowSearchDropdown(false); setSelectedDeviceId(null); }} className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm text-slate-700 dark:text-slate-300">
                         <span className="truncate block">{e.plain_description}</span> <span className="text-[10px] text-slate-500 block">{e.device_id}</span>
                       </button>
                     ))}
@@ -325,7 +325,7 @@ function App() {
                   <div className="p-2">
                     <p className="text-[10px] font-bold text-slate-500 uppercase px-2 mb-1">Audit Logs</p>
                     {globalSearchResults.logs.map(l => (
-                      <button key={l.id} onClick={() => { setCurrentView('audit'); setShowSearchDropdown(false); }} className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm text-slate-700 dark:text-slate-300">
+                      <button key={l.id} onClick={() => { setCurrentView('audit'); setShowSearchDropdown(false); setSelectedDeviceId(null); }} className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm text-slate-700 dark:text-slate-300">
                         <span className="truncate block">{l.actionTaken}</span> <span className="text-[10px] text-slate-500 block">{l.assetId}</span>
                       </button>
                     ))}
@@ -388,7 +388,7 @@ function App() {
                   </div>
                   {activeRecommendations.length > 5 && (
                     <button
-                      onClick={() => { setCurrentView('dashboard'); setShowNotifications(false) }}
+                      onClick={() => { setCurrentView('dashboard'); setShowNotifications(false); setSelectedDeviceId(null); }}
                       className="w-full text-center text-xs font-semibold text-indigo-400 hover:text-indigo-300 py-3 border-t border-slate-200 dark:border-white/10 transition-colors"
                     >
                       View all {activeRecommendations.length} →
@@ -477,7 +477,7 @@ function App() {
               {/* Device Status Pie Chart */}
               <div 
                 className="glass-panel p-6 col-span-1 cursor-pointer hover:bg-white/50 dark:hover:bg-white/5 hover:backdrop-blur-sm transition-all"
-                onClick={() => setCurrentView('dashboard')}
+                onClick={() => { setCurrentView('dashboard'); setSelectedDeviceId(null); }}
               >
                 <div className="flex items-center gap-3 mb-8">
                   <PieChart className="w-5 h-5 text-indigo-400" />
@@ -518,7 +518,7 @@ function App() {
               {/* Action Metrics */}
               <div 
                 className="glass-panel p-6 col-span-1 md:col-span-2 flex flex-col cursor-pointer hover:bg-white/50 dark:hover:bg-white/5 hover:backdrop-blur-sm transition-all"
-                onClick={() => setCurrentView('dashboard')}
+                onClick={() => { setCurrentView('dashboard'); setSelectedDeviceId(null); }}
               >
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
@@ -733,7 +733,7 @@ function App() {
                 <div className="flex items-center gap-4">
                   <span className="text-xs text-slate-600 dark:text-slate-400">{activeRecommendations.length} pending approval</span>
                   <button
-                    onClick={() => setCurrentView('dashboard')}
+                    onClick={() => { setCurrentView('dashboard'); setSelectedDeviceId(null); }}
                     className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full"
                   >
                     View all in Command Center →
@@ -747,6 +747,7 @@ function App() {
                     onClick={() => {
                       setSelectedRecId(rec.id);
                       setCurrentView('dashboard');
+                      setSelectedDeviceId(null);
                     }}
                     className="p-5 hover:bg-white/50 dark:hover:bg-white/5 hover:backdrop-blur-sm transition-all cursor-pointer"
                   >
