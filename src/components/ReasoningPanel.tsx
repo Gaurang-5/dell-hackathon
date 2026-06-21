@@ -1,45 +1,69 @@
 import type { ReasoningStep } from '../types'
+import { Search, AlertCircle, Lightbulb, CheckCircle2 } from 'lucide-react'
 
 interface ReasoningPanelProps {
   steps: ReasoningStep[]
 }
 
-const AGENT_BADGES = [
-  '🔍 Detection Core',
-  '⚖️ Policy Engine',
-  '🛠️ Remediation Agent',
-]
+const getStepConfig = (index: number) => {
+  switch (index) {
+    case 0:
+      return {
+        icon: <Search className="w-5 h-5 text-indigo-400" />,
+        bgClass: 'bg-indigo-500/10',
+        borderClass: 'border-indigo-500/20',
+        indicatorClass: 'bg-indigo-500',
+      }
+    case 1:
+      return {
+        icon: <AlertCircle className="w-5 h-5 text-amber-400" />,
+        bgClass: 'bg-amber-500/10',
+        borderClass: 'border-amber-500/20',
+        indicatorClass: 'bg-amber-500',
+      }
+    case 2:
+      return {
+        icon: <Lightbulb className="w-5 h-5 text-emerald-400" />,
+        bgClass: 'bg-emerald-500/10',
+        borderClass: 'border-emerald-500/20',
+        indicatorClass: 'bg-emerald-500',
+      }
+    default:
+      return {
+        icon: <CheckCircle2 className="w-5 h-5 text-slate-400" />,
+        bgClass: 'bg-slate-500/10',
+        borderClass: 'border-slate-500/20',
+        indicatorClass: 'bg-slate-500',
+      }
+  }
+}
 
 export function ReasoningPanel({ steps }: ReasoningPanelProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4">
       {steps.map((step, index) => {
-        const badgeText = AGENT_BADGES[index] || '🤖 Support Agent'
-        const isLast = index === steps.length - 1
+        const config = getStepConfig(index)
 
         return (
-          <div key={step.stepNum} className="relative flex gap-4 pb-6 last:pb-0">
-            {/* Connecting Line for Pipeline Flow */}
-            {!isLast && (
-              <div className="absolute bottom-0 left-[11px] top-6 w-[2px] bg-blue-200/50 animate-pulse" />
-            )}
-
-            <div className="relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-blue-200 bg-white text-[10px] font-bold text-blue-700 shadow-sm">
-              {index + 1}
-            </div>
+          <div 
+            key={step.stepNum} 
+            className="group relative overflow-hidden rounded-xl border border-white/5 bg-[#171427]/40 p-5 shadow-sm transition-all hover:bg-[#171427]/60 hover:border-white/10"
+          >
+            <div className={`absolute top-0 left-0 w-1.5 h-full ${config.indicatorClass} opacity-80`} />
             
-            <div className="flex flex-col gap-1.5 pt-0.5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm font-bold text-slate-800">
-                  {step.label}
-                </span>
-                <span className="rounded border border-blue-200 bg-blue-50 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-blue-700 shadow-sm">
-                  {badgeText}
-                </span>
+            <div className="flex items-start gap-4 ml-2">
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${config.bgClass} ${config.borderClass}`}>
+                {config.icon}
               </div>
-              <p className="text-sm leading-relaxed text-slate-600">
-                {step.detail}
-              </p>
+              
+              <div className="flex flex-col gap-1.5">
+                <h4 className="text-sm font-bold text-white tracking-wide">
+                  {step.label}
+                </h4>
+                <p className="text-sm leading-relaxed text-slate-300">
+                  {step.detail}
+                </p>
+              </div>
             </div>
           </div>
         )

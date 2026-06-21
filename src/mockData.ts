@@ -30,7 +30,6 @@ export const initialActivityLogs: ActivityLogEntry[] = (auditLogRaw as unknown a
     assetIcon: entry.assetIcon,
     actionTaken: entry.actionTaken,
     reasoningSummary: entry.reasoningSummary,
-    confidence: entry.confidence,
     humanDecision: entry.humanDecision,
     sourceMatrix: undefined,
   })
@@ -116,7 +115,6 @@ export const initialEscalationQueue: EscalationItem[] = (securityEventsRaw as an
     timeAgo: timeAgo(event.timestamp),
     reasonText: event.plain_description,
     originalAction: originalActionFor(event.event_type),
-    confidenceScore: event.severity === 'critical' ? '0.41' : '0.58',
     logicNodeDetails: logicNodeDetailsFor(
       event.event_type,
       event.plain_description

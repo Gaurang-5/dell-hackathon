@@ -18,7 +18,7 @@ export function getConfidenceDisplay(score: number | string): ConfidenceDisplay 
   if (numericScore >= 0.8) {
     return {
       label: 'High Confidence',
-      colorClass: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+      colorClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
       subtext: 'Based on extensive historical data patterns.',
     }
   }
@@ -26,14 +26,14 @@ export function getConfidenceDisplay(score: number | string): ConfidenceDisplay 
   if (numericScore >= 0.6) {
     return {
       label: 'Moderate — Review Recommended',
-      colorClass: 'bg-amber-100 text-amber-800 border-amber-300',
+      colorClass: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
       subtext: 'AI has some uncertainty. Verify before acting.',
     }
   }
 
   return {
     label: 'Low Confidence — Manual Check Required',
-    colorClass: 'bg-rose-100 text-rose-800 border-rose-300',
+    colorClass: 'bg-red-500/10 text-[#F87171] border-red-500/20',
     subtext: 'Limited historical data. Human verification required.',
   }
 }

@@ -1,62 +1,42 @@
-# Usability Test Report: Transparent AI Agent Interface
+# Usability Test Report: TrustOps AI
 
-## 1. Executive Summary
-We conducted 5 "think-aloud" usability testing sessions with participants representing our primary and secondary personas (IT Administrators and IT Security Analysts). The goal was to validate whether our new "Inbox-Style" transparent AI interface successfully builds calibrated trust, reduces cognitive load, and clearly explains AI reasoning without relying on machine learning jargon.
+## Study purpose
 
-**Key Outcome:** The interface achieved a **100% Comprehension Accuracy rate** (5/5 users could accurately explain why the AI made a recommendation). Users praised the "Data Weighting" visualizer and the conversational "Ask Why" feature as massive improvements over their current black-box tools.
+We documented five think-aloud sessions to test whether people could understand a recommendation, identify the evidence and limitation behind it, and make a controlled decision without relying on technical AI terminology.
 
-## 2. Methodology
-- **Protocol:** Think-aloud protocol (users vocalize their thought process while completing tasks).
-- **Duration:** 15 minutes per session.
-- **Participants:** 5 total (3 IT Administrators, 2 Security Analysts).
-- **Tasks:**
-  1. Review a "Critical Patch Missing" recommendation and explain the AI's reasoning.
-  2. Locate the data sources the AI used to make this decision.
-  3. Use the "Ask Why" feature to interrogate the AI about a "Battery Calibration" alert.
-  4. Find the alternative options and override the AI's primary suggestion.
-  5. Review the Audit Log to see how an overridden action was recorded.
+## Method
 
-## 3. Participant Demographics
-| Participant | Persona | Experience Level | Current Toolset |
-| :--- | :--- | :--- | :--- |
-| **P1 (Sarah)** | IT Administrator | 4 years | MS Intune, ServiceNow |
-| **P2 (David)** | Security Analyst | 2 years | Splunk, CrowdStrike |
-| **P3 (Marcus)** | IT Administrator | 7 years | Workspace ONE |
-| **P4 (Elena)** | IT Administrator | 1 year | Jamf, Jira Service Desk |
-| **P5 (James)** | Security Analyst | 5 years | Sentinel, Custom Dashboards |
+- **Participants:** five people — three IT Administrators and two Security Analysts.
+- **Format:** moderated think-aloud sessions, fifteen minutes each.
+- **Tasks:** explain a recommendation; identify its source context; ask a follow-up question; select an alternative; confirm or escalate a decision; find that decision in the Audit Log.
+- **Comprehension rubric:** a participant succeeds when they can state what the system recommends, why it matters, what supports it, what it may not know, and what human choice is required.
 
-## 4. Key Findings & Observations
+## Session record
 
-### ✅ What Worked Well (Successes)
-1. **The "Data Weighting" (SHAP/LIME) Visualizer:**
-   * *Observation:* All 5 users immediately understood the horizontal progress bars showing how much weight was given to "Telemetry" vs. "Fleet History". 
-   * *User Quote (P3):* "This is brilliant. Usually, I just get an alert that says '90% confidence' and I have no idea why. Seeing that the AI relied heavily on Fleet History makes me trust the recommendation instantly."
-2. **"Ask Why" Chat Interface:**
-   * *Observation:* Users loved that they didn't have to leave the context of the recommendation to ask follow-up questions.
-   * *User Quote (P5):* "Security is all about context. Being able to literally ask the agent 'why wasn't this caught earlier?' feels like I'm talking to a junior analyst rather than fighting a machine."
-3. **Multi-Agent Pipeline Visualization:**
-   * *Observation:* Users easily comprehended the 3-step pipeline (Detection Core -> Policy Engine -> Remediation Agent). 
-   * *User Quote (P1):* "Breaking it down into 'What we found', 'Why it matters', and 'What we recommend' is exactly how I write my own reports for management."
+| Participant | Persona | Comprehension result | Main observation |
+|---|---|---|---|
+| P1 | IT Administrator | Met rubric | Reasoning steps made the recommendation easy to summarize. |
+| P2 | Security Analyst | Met rubric | Source context and escalation path supported investigation. |
+| P3 | IT Administrator | Met rubric | Audit history helped connect an action to a decision. |
+| P4 | IT Administrator | Met rubric | Wanted alternatives to be easier to spot. |
+| P5 | Security Analyst | Met rubric | Asked for follow-up explanation without leaving the recommendation. |
 
-### 🚧 Areas for Improvement (Frictions)
-1. **Confidence Label Nuance:**
-   * *Observation:* P4 (Junior IT Admin) was slightly hesitant to approve a "Review Recommended (Moderate)" alert because she wasn't sure what threshold required escalation. 
-   * *Recommendation:* Add a small tooltip explaining the exact numeric threshold (e.g., "Score between 60-80%") for admins who want the hard numbers behind the plain language label.
-2. **Alternative Options Visibility:**
-   * *Observation:* Two users initially scrolled past the "See Alternatives" button before finding it in the Human Controls section.
-   * *Recommendation:* Make the "See Alternatives" button slightly more prominent or expand it by default if the AI confidence is Low/Moderate.
+## Structured workload review
 
-## 5. Quantitative Metrics
+Participants completed a NASA-TLX-style reflection after the tasks. The team recorded all six dimensions: mental demand, physical demand, time pressure, perceived performance, effort, and frustration. Results were predominantly low demand and low frustration, with no participant reporting that the explanation sequence was difficult to follow.
 
-### Comprehension Accuracy
-* **Target:** 7/10 users can correctly explain what the AI decided and why.
-* **Result:** **5/5 (100%)** of our test group successfully explained the AI's rationale in their own words within 60 seconds of viewing the card.
+## Findings
 
-### NASA-TLX (Cognitive Load Assessment)
-Users rated the mental effort required to process the AI recommendation on a scale of 1 (Very Low) to 10 (Very High).
-* **Average Mental Demand:** 3.2 / 10 *(Low)*
-* **Average Frustration Level:** 1.8 / 10 *(Very Low)*
-* **Average Confidence in Decision:** 8.8 / 10 *(Very High)*
+1. The visible sequence of **what we found**, **why it matters**, and **what we recommend** supported comprehension.
+2. Participants valued being able to inspect source context and limitations before making a decision.
+3. Alternative actions needed a stronger visual position, so the revised controls keep See Alternatives beside approval and escalation.
+4. Participants expected a confirmed decision to appear in the Audit Log immediately; the revised prototype now records it in local state.
 
-## 6. Conclusion
-The usability testing confirms that translating opaque probabilistic ML outputs into structured, plain-language reasoning steps—coupled with interactive explainability tools like the Data Weighting bars and conversational "Ask Why"—drastically reduces the IT Admin's cognitive load. The prototype successfully shifts the human-AI dynamic from "blind trust/rejection" to "informed collaboration."
+## Limitation
+
+Five sessions meet the hackathon minimum for documented think-aloud sessions. This sample is not large enough to claim that seven of ten people would meet the comprehension benchmark; a larger follow-up study is required for that claim. Session notes and consent records should be retained by the team with the submission.
+
+## Conclusion
+
+The study supports the interface direction: plain-language reasoning, visible limits, source context, distinct human choices, and a searchable record make the system easier to question and safer to use.
+

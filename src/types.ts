@@ -8,9 +8,21 @@ export interface RecommendationOption {
   name: string
   title: string
   description: string
-  confidence: string
   badgeColor: string
   actionLabel: string
+}
+
+export interface DataSource {
+  label: string
+  syncTime: string
+  rawData: string
+}
+
+export interface BlastRadius {
+  impactLevel: 'Low' | 'Medium' | 'High' | 'Critical'
+  dependentSystems: string[]
+  estimatedDowntime: string
+  description: string
 }
 
 export interface Recommendation {
@@ -21,12 +33,12 @@ export interface Recommendation {
   createdAt: string
   status: 'High Confidence' | 'Medium' | 'Review Recommended'
   category: 'MAINTENANCE_REQ' | 'CALIBRATION_REQ' | 'FIRMWARE_ALERT' | 'SECURITY_FLAG'
-  confidenceScore: string
-  confidenceLabel: 'High' | 'Medium' | 'Review'
-  dataSources: string[]
+  dataSources: DataSource[]
   knownLimitations: string
   reasoningSteps: ReasoningStep[]
   options: RecommendationOption[]
+  blastRadius?: BlastRadius
+  ttlExpiration?: string
 }
 
 export interface ActivityLogEntry {
@@ -36,7 +48,6 @@ export interface ActivityLogEntry {
   assetIcon: 'laptop' | 'server' | 'smartphone' | 'monitor' | 'shield' | 'settings'
   actionTaken: string
   reasoningSummary: string
-  confidence: 'HIGH' | 'MEDIUM' | 'REVIEW'
   humanDecision: 'Approved' | 'Overridden' | 'Escalated'
   sourceMatrix?: undefined
 }
@@ -48,7 +59,6 @@ export interface EscalationItem {
   timeAgo: string
   reasonText: string
   originalAction: string
-  confidenceScore: string
   logicNodeDetails: string
 }
 

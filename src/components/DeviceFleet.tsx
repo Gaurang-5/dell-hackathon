@@ -1,4 +1,5 @@
-import { Monitor, ShieldCheck, ShieldAlert, AlertTriangle } from 'lucide-react'
+import { useState, useMemo } from 'react'
+import { Monitor, ShieldCheck, ShieldAlert, AlertTriangle, Search, Filter, ArrowUpDown } from 'lucide-react'
 import type { Device } from '../types'
 
 interface DeviceFleetProps {
@@ -6,19 +7,82 @@ interface DeviceFleetProps {
 }
 
 export function DeviceFleet({ devices }: DeviceFleetProps) {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filterOS, setFilterOS] = useState('ALL')
+  const [sortBy, setSortBy] = useState<'Name' | 'Compliance'>('Name')
+
+  const filteredAndSortedDevices = useMemo(() => {
+    return devices
+      .filter(device => {
+        const matchesSearch = device.device_name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              device.assigned_user.toLowerCase().includes(searchQuery.toLowerCase())
+        const matchesFilter = filterOS === 'ALL' || device.os === filterOS
+        return matchesSearch && matchesFilter
+      })
+      .sort((a, b) => {
+        if (sortBy === 'Compliance') {
+          return a.patch_compliance_pct - b.patch_compliance_pct
+        }
+        return a.device_name.localeCompare(b.device_name)
+      })
+  }, [devices, searchQuery, filterOS, sortBy])
+
+  const uniqueOS = useMemo(() => Array.from(new Set(devices.map(d => d.os))), [devices])
+
   return (
     <div className="flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-300">
-      <header className="mb-2">
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Fleet Management</h1>
-        <p className="mt-2 text-slate-500 font-medium">
-          Overview of 50 managed endpoint devices
-        </p>
+      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-2">
+        <div>
+          <h1 className="text-3xl font-extrabold tracking-tight text-white">Fleet Management</h1>
+          <p className="mt-2 text-slate-400 font-medium">
+            Overview of {filteredAndSortedDevices.length} managed endpoint devices
+          </p>
+        </div>
+        
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search devices or users..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 pr-4 py-2 bg-[#101010]/50 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-indigo-500/50 w-64"
+            />
+          </div>
+          
+          <div className="flex items-center gap-2 bg-[#101010]/50 border border-white/10 rounded-lg px-3 py-2">
+            <Filter className="w-4 h-4 text-slate-400" />
+            <select
+              value={filterOS}
+              onChange={(e) => setFilterOS(e.target.value)}
+              className="bg-transparent text-sm text-slate-300 focus:outline-none"
+            >
+              <option value="ALL">All OS</option>
+              {uniqueOS.map(os => (
+                <option key={os} value={os}>{os}</option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="flex items-center gap-2 bg-[#101010]/50 border border-white/10 rounded-lg px-3 py-2">
+            <ArrowUpDown className="w-4 h-4 text-slate-400" />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as 'Name' | 'Compliance')}
+              className="bg-transparent text-sm text-slate-300 focus:outline-none"
+            >
+              <option value="Name">Sort by Name</option>
+              <option value="Compliance">Sort by Compliance</option>
+            </select>
+          </div>
+        </div>
       </header>
 
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-xl shadow-xl shadow-slate-200/50 ring-1 ring-slate-900/5">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-600">
-            <thead className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+      <div className="glass-panel">
+        <div className="glass-surface overflow-x-auto">
+          <table className="w-full text-left text-sm text-slate-400">
+            <thead className="border-b border-white/10 bg-[#171427]/50 text-xs uppercase tracking-wider text-slate-300">
               <tr>
                 <th scope="col" className="px-6 py-4 font-medium">Device Name & ID</th>
                 <th scope="col" className="px-6 py-4 font-medium">OS & Type</th>
@@ -27,34 +91,34 @@ export function DeviceFleet({ devices }: DeviceFleetProps) {
                 <th scope="col" className="px-6 py-4 font-medium">Antivirus Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
-              {devices.slice(0, 50).map((device) => {
+            <tbody className="divide-y divide-white/5">
+              {filteredAndSortedDevices.map((device) => {
                 const patchPct = Math.round(device.patch_compliance_pct * 100)
                 const isPatchWarning = patchPct < 70
 
                 return (
-                  <tr key={device.device_id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={device.device_id} className="hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="rounded-md bg-slate-100 p-2 text-slate-500">
+                        <div className="rounded-md bg-white/10 p-2 text-slate-300">
                           <Monitor className="h-5 w-5" />
                         </div>
                         <div>
-                          <p className="font-bold text-slate-900">{device.device_name}</p>
+                          <p className="font-bold text-white">{device.device_name}</p>
                           <p className="text-xs text-slate-500">{device.device_id}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="font-medium text-slate-700">{device.os}</p>
+                      <p className="font-medium text-slate-300">{device.os}</p>
                       <p className="text-xs capitalize text-slate-500">{device.fleet_segment} Segment</p>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="font-medium text-slate-700">{device.assigned_user}</p>
+                      <p className="font-medium text-slate-300">{device.assigned_user}</p>
                       <p className="text-xs text-slate-500">{device.department}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`font-bold ${isPatchWarning ? 'text-red-600' : 'text-slate-700'}`}>
+                      <span className={`font-bold ${isPatchWarning ? 'text-[#F87171]' : 'text-slate-300'}`}>
                         {patchPct}%
                       </span>
                     </td>

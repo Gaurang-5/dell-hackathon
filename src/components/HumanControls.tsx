@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { AlertTriangle, CheckCircle2, Play, ShieldAlert, X, MessageSquare, GitBranch } from 'lucide-react'
-import type { RecommendationOption } from '../types'
+import type { RecommendationOption, DataSource } from '../types'
 
 interface HumanControlsProps {
   options: RecommendationOption[]
   assetId: string
   recommendationTitle: string
-  dataSources: string[]
+  dataSources: DataSource[]
   onActionConfirm: (action: string) => void
 }
 
@@ -39,10 +39,10 @@ export function HumanControls({
     setPendingAction(null)
   }
 
-  const handleSendMessage = async () => {
-    if (!askWhyInput.trim()) return
-    const userText = askWhyInput.trim()
-    setAskWhyInput('')
+  const handleSendMessage = async (text?: string) => {
+    const userText = (text || askWhyInput).trim()
+    if (!userText) return
+    if (!text) setAskWhyInput('')
     
     setChatHistory((prev) => [...prev, { role: 'user', text: userText }])
     setIsTyping(true)
@@ -53,23 +53,37 @@ export function HumanControls({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           recommendationTitle,
-          contextText: dataSources.join(', '),
+          contextText: dataSources.map(d => d.label).join(', '),
           questionText: userText
         })
       })
       const data = await response.json()
       
-      setChatHistory((prev) => [
-        ...prev,
-        { role: 'ai', text: data.answer || "I'm having trouble connecting to the AI agent right now." }
-      ])
+      const responseText = data.answer || "I'm having trouble connecting to the AI agent right now."
+      
+      // Simulate streaming effect for better UX
+      setIsTyping(false) // turn off typing indicator
+      setChatHistory((prev) => [...prev, { role: 'ai', text: '' }])
+      
+      let currentText = ''
+      const words = responseText.split(' ')
+      
+      for (let i = 0; i < words.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 20 + Math.random() * 40)) // 20-60ms per word
+        currentText += (i === 0 ? '' : ' ') + words[i]
+        setChatHistory((prev) => {
+          const newHistory = [...prev]
+          newHistory[newHistory.length - 1] = { role: 'ai', text: currentText }
+          return newHistory
+        })
+      }
+      
     } catch (err) {
+      setIsTyping(false)
       setChatHistory((prev) => [
         ...prev,
         { role: 'ai', text: "Sorry, there was an error processing your request." }
       ])
-    } finally {
-      setIsTyping(false)
     }
   }
 
@@ -117,10 +131,10 @@ export function HumanControls({
           <button
             type="button"
             onClick={() => setPendingAction(primaryOption.actionLabel)}
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border-0"
+            className="inline-flex items-center gap-2 rounded-full bg-[#FAFAFA] px-6 py-4 text-sm font-semibold text-[#020617] hover:bg-white hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 border-0 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
           >
             <CheckCircle2 className="h-4 w-4" />
-            {primaryOption.actionLabel}
+            Approve ({primaryOption.actionLabel})
           </button>
         )}
 
@@ -130,9 +144,9 @@ export function HumanControls({
             setShowAskWhy(!showAskWhy)
             setShowAlternatives(false)
           }}
-          className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#171427]/50 backdrop-blur-sm px-6 py-4 text-sm font-medium text-white hover:border-white/20 hover:bg-[#171427]/80 transition-all focus:outline-none"
         >
-          <MessageSquare className="h-4 w-4 text-slate-400" />
+          <MessageSquare className="h-4 w-4 text-[#EDE9FE]" />
           Ask Why
         </button>
 
@@ -143,9 +157,9 @@ export function HumanControls({
               setShowAlternatives(!showAlternatives)
               setShowAskWhy(false)
             }}
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#171427]/50 backdrop-blur-sm px-6 py-4 text-sm font-medium text-white hover:border-white/20 hover:bg-[#171427]/80 transition-all focus:outline-none"
           >
-            <GitBranch className="h-4 w-4 text-slate-400" />
+            <GitBranch className="h-4 w-4 text-[#EDE9FE]" />
             See Alternatives
           </button>
         )}
@@ -153,22 +167,22 @@ export function HumanControls({
         <button
           type="button"
           onClick={() => setPendingAction(ESCALATE_ACTION)}
-          className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-white px-5 py-2.5 text-sm font-medium text-red-600 shadow-sm hover:border-red-300 hover:bg-red-50 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ml-auto"
+          className="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-6 py-4 text-sm font-medium text-[#F87171] hover:bg-red-500/20 transition-all focus:outline-none ml-auto"
         >
           <AlertTriangle className="h-4 w-4" />
-          Escalate
+          Escalate to Human Review
         </button>
       </div>
 
       {showAskWhy && (
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 animate-in slide-in-from-top-2 duration-200 flex flex-col max-h-[300px]">
+        <div className="rounded-lg border border-white/10 bg-[#101010]/50 p-4 animate-in slide-in-from-top-2 duration-200 flex flex-col min-h-[350px] max-h-[500px]">
           <div className="flex-1 overflow-y-auto mb-4 flex flex-col gap-3 pr-2">
             {chatHistory.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`rounded-lg px-3 py-2 text-sm max-w-[85%] ${
                   msg.role === 'user' 
-                    ? 'bg-indigo-600 text-white' 
-                    : 'bg-white border border-slate-200 text-slate-700'
+                    ? 'bg-indigo-500/20 border border-indigo-500/30 text-indigo-100' 
+                    : 'bg-[#171427]/80 border border-white/5 text-slate-300'
                 }`}>
                   {msg.role === 'ai' && <strong className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">AI Agent</strong>}
                   {msg.text}
@@ -177,9 +191,22 @@ export function HumanControls({
             ))}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="rounded-lg bg-white border border-slate-200 px-3 py-2 text-sm text-slate-500">
+                <div className="rounded-lg bg-[#171427]/80 border border-white/5 px-3 py-2 text-sm text-slate-500">
                   <span className="animate-pulse">Typing...</span>
                 </div>
+              </div>
+            )}
+            {!isTyping && chatHistory.length === 1 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {['Why was this flagged now?', 'What is the exact risk?', 'How do we fix this?'].map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => handleSendMessage(q)}
+                    className="text-[11px] rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1.5 text-indigo-300 hover:bg-indigo-500/20 hover:border-indigo-500/50 transition-colors"
+                  >
+                    {q}
+                  </button>
+                ))}
               </div>
             )}
           </div>
@@ -190,13 +217,13 @@ export function HumanControls({
               onChange={(e) => setAskWhyInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               placeholder="e.g. Why wasn't this caught earlier?"
-              className="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-white text-slate-900 placeholder:text-slate-400"
+              className="flex-1 rounded-md border border-white/10 bg-[#101010] px-3 py-2 text-sm focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 text-white placeholder:text-slate-500"
               disabled={isTyping}
             />
             <button
-              onClick={handleSendMessage}
+              onClick={() => handleSendMessage()}
               disabled={isTyping}
-              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none disabled:opacity-50"
+              className="rounded-md bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none disabled:opacity-50"
             >
               Send
             </button>
@@ -205,17 +232,17 @@ export function HumanControls({
       )}
 
       {showAlternatives && alternativeOptions.length > 0 && (
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 animate-in slide-in-from-top-2 duration-200 flex flex-col gap-3">
-          <h4 className="text-sm font-bold text-slate-800 mb-1">Alternative Options</h4>
+        <div className="rounded-lg border border-white/10 bg-[#101010]/50 p-4 animate-in slide-in-from-top-2 duration-200 flex flex-col gap-3">
+          <h4 className="text-sm font-bold text-white mb-1">Alternative Options</h4>
           {alternativeOptions.map((opt) => (
-            <div key={opt.name} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-md border border-slate-200 bg-white p-3 shadow-sm">
+            <div key={opt.name} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-md border border-white/5 bg-[#171427]/40 p-3 shadow-sm hover:bg-[#171427]/60 transition-colors">
               <div>
-                <p className="text-sm font-bold text-slate-800">{opt.title}</p>
-                <p className="text-xs text-slate-500 mt-1">{opt.description}</p>
+                <p className="text-sm font-bold text-white">{opt.title}</p>
+                <p className="text-xs text-slate-400 mt-1">{opt.description}</p>
               </div>
               <button
                 onClick={() => setPendingAction(opt.actionLabel)}
-                className="shrink-0 rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-1"
+                className="shrink-0 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#EDE9FE]/50 transition-colors"
               >
                 Override: {opt.actionLabel}
               </button>

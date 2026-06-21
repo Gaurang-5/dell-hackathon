@@ -10,9 +10,21 @@
     "confidenceScore": "0.74",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Battery calibration readings from the past 30 days",
-      "Power management logs across 1,815 mobile devices",
-      "Manufacturer calibration guidelines"
+      {
+        "label": "Battery calibration readings from the past 30 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Power management logs across 1,815 mobile devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer calibration guidelines",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Battery calibration works best when the user can leave the device undisturbed for several hours. Active travel schedules may delay the process.",
     "reasoningSteps": [
@@ -49,7 +61,17 @@
         "badgeColor": "error",
         "actionLabel": "Request Replacement"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Low",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "0 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Low risk to dependent services."
+    }
   },
   {
     "id": "rec-002",
@@ -62,9 +84,21 @@
     "confidenceScore": "0.46",
     "confidenceLabel": "Review",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,903 similar Ubuntu 22.04 LTS devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,903 similar Ubuntu 22.04 LTS devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -101,7 +135,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Medium",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "5 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Medium risk to dependent services."
+    }
   },
   {
     "id": "rec-003",
@@ -114,9 +158,21 @@
     "confidenceScore": "0.44",
     "confidenceLabel": "Review",
     "dataSources": [
-      "BIOS/UEFI version reported by this device",
-      "Manufacturer firmware release notes for model Latitude-5430",
-      "Firmware version comparison across 1,903 similar devices"
+      {
+        "label": "BIOS/UEFI version reported by this device",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer firmware release notes for model Latitude-5430",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Firmware version comparison across 1,903 similar devices",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
     "reasoningSteps": [
@@ -153,7 +209,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule Update"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T15:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "High",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. High risk to dependent services."
+    }
   },
   {
     "id": "rec-004",
@@ -166,9 +232,21 @@
     "confidenceScore": "0.86",
     "confidenceLabel": "High",
     "dataSources": [
-      "Disk usage telemetry for this device over the past 60 days",
-      "Fleet maintenance records covering 1,742 similar Mobile devices",
-      "Support ticket history from the last 12 months"
+      {
+        "label": "Disk usage telemetry for this device over the past 60 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Fleet maintenance records covering 1,742 similar Mobile devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Support ticket history from the last 12 months",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
     "reasoningSteps": [
@@ -205,7 +283,17 @@
         "badgeColor": "error",
         "actionLabel": "Notify User"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Critical",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. Critical risk to dependent services."
+    }
   },
   {
     "id": "rec-005",
@@ -218,9 +306,21 @@
     "confidenceScore": "0.79",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,856 similar Android 13 devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,856 similar Android 13 devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -257,7 +357,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Low",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "0 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Low risk to dependent services."
+    }
   },
   {
     "id": "rec-006",
@@ -270,9 +380,21 @@
     "confidenceScore": "0.96",
     "confidenceLabel": "High",
     "dataSources": [
-      "Disk usage telemetry for this device over the past 60 days",
-      "Fleet maintenance records covering 1,647 similar Laptop devices",
-      "Support ticket history from the last 12 months"
+      {
+        "label": "Disk usage telemetry for this device over the past 60 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Fleet maintenance records covering 1,647 similar Laptop devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Support ticket history from the last 12 months",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
     "reasoningSteps": [
@@ -309,7 +431,17 @@
         "badgeColor": "error",
         "actionLabel": "Notify User"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T15:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Medium",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "5 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Medium risk to dependent services."
+    }
   },
   {
     "id": "rec-007",
@@ -322,9 +454,21 @@
     "confidenceScore": "0.89",
     "confidenceLabel": "High",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,815 similar Ubuntu 22.04 LTS devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,815 similar Ubuntu 22.04 LTS devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -361,7 +505,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "High",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. High risk to dependent services."
+    }
   },
   {
     "id": "rec-008",
@@ -374,9 +528,21 @@
     "confidenceScore": "0.93",
     "confidenceLabel": "High",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,742 similar Ubuntu 22.04 LTS devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,742 similar Ubuntu 22.04 LTS devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -413,7 +579,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Critical",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. Critical risk to dependent services."
+    }
   },
   {
     "id": "rec-009",
@@ -426,9 +602,21 @@
     "confidenceScore": "0.62",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,647 similar Ubuntu 22.04 LTS devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,647 similar Ubuntu 22.04 LTS devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -465,7 +653,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T15:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Low",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "0 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Low risk to dependent services."
+    }
   },
   {
     "id": "rec-010",
@@ -478,9 +676,21 @@
     "confidenceScore": "0.59",
     "confidenceLabel": "Review",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,647 similar Ubuntu 22.04 LTS devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,647 similar Ubuntu 22.04 LTS devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -517,7 +727,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Medium",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "5 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Medium risk to dependent services."
+    }
   },
   {
     "id": "rec-011",
@@ -530,9 +750,21 @@
     "confidenceScore": "0.98",
     "confidenceLabel": "High",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,856 similar Windows 11 Pro devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,856 similar Windows 11 Pro devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -569,7 +801,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "High",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. High risk to dependent services."
+    }
   },
   {
     "id": "rec-012",
@@ -582,9 +824,21 @@
     "confidenceScore": "0.64",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Disk usage telemetry for this device over the past 60 days",
-      "Fleet maintenance records covering 1,742 similar Workstation devices",
-      "Support ticket history from the last 12 months"
+      {
+        "label": "Disk usage telemetry for this device over the past 60 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Fleet maintenance records covering 1,742 similar Workstation devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Support ticket history from the last 12 months",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
     "reasoningSteps": [
@@ -621,7 +875,17 @@
         "badgeColor": "error",
         "actionLabel": "Notify User"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T15:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Critical",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. Critical risk to dependent services."
+    }
   },
   {
     "id": "rec-013",
@@ -634,9 +898,21 @@
     "confidenceScore": "0.75",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Disk usage telemetry for this device over the past 60 days",
-      "Fleet maintenance records covering 1,742 similar Mobile devices",
-      "Support ticket history from the last 12 months"
+      {
+        "label": "Disk usage telemetry for this device over the past 60 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Fleet maintenance records covering 1,742 similar Mobile devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Support ticket history from the last 12 months",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
     "reasoningSteps": [
@@ -673,7 +949,17 @@
         "badgeColor": "error",
         "actionLabel": "Notify User"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Low",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "0 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Low risk to dependent services."
+    }
   },
   {
     "id": "rec-014",
@@ -686,9 +972,21 @@
     "confidenceScore": "0.67",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Battery calibration readings from the past 30 days",
-      "Power management logs across 1,815 mobile devices",
-      "Manufacturer calibration guidelines"
+      {
+        "label": "Battery calibration readings from the past 30 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Power management logs across 1,815 mobile devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer calibration guidelines",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Battery calibration works best when the user can leave the device undisturbed for several hours. Active travel schedules may delay the process.",
     "reasoningSteps": [
@@ -725,7 +1023,17 @@
         "badgeColor": "error",
         "actionLabel": "Request Replacement"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Medium",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "5 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Medium risk to dependent services."
+    }
   },
   {
     "id": "rec-015",
@@ -738,9 +1046,21 @@
     "confidenceScore": "0.50",
     "confidenceLabel": "Review",
     "dataSources": [
-      "BIOS/UEFI version reported by this device",
-      "Manufacturer firmware release notes for model MacBook-Pro-14",
-      "Firmware version comparison across 1,815 similar devices"
+      {
+        "label": "BIOS/UEFI version reported by this device",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer firmware release notes for model MacBook-Pro-14",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Firmware version comparison across 1,815 similar devices",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
     "reasoningSteps": [
@@ -777,7 +1097,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule Update"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T15:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "High",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. High risk to dependent services."
+    }
   },
   {
     "id": "rec-016",
@@ -790,9 +1120,21 @@
     "confidenceScore": "0.69",
     "confidenceLabel": "Medium",
     "dataSources": [
-      "Battery calibration readings from the past 30 days",
-      "Power management logs across 1,903 mobile devices",
-      "Manufacturer calibration guidelines"
+      {
+        "label": "Battery calibration readings from the past 30 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Power management logs across 1,903 mobile devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer calibration guidelines",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Battery calibration works best when the user can leave the device undisturbed for several hours. Active travel schedules may delay the process.",
     "reasoningSteps": [
@@ -829,7 +1171,17 @@
         "badgeColor": "error",
         "actionLabel": "Request Replacement"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Critical",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. Critical risk to dependent services."
+    }
   },
   {
     "id": "rec-017",
@@ -842,9 +1194,21 @@
     "confidenceScore": "0.96",
     "confidenceLabel": "High",
     "dataSources": [
-      "Windows Update patch history for this device (last 90 days)",
-      "Microsoft Security Bulletin database — June 2024",
-      "Patch compliance records across 1,742 similar Windows 10 Enterprise devices in your fleet"
+      {
+        "label": "Windows Update patch history for this device (last 90 days)",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Microsoft Security Bulletin database — June 2024",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Patch compliance records across 1,742 similar Windows 10 Enterprise devices in your fleet",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "This recommendation assumes the device has a stable internet connection for patch download. Devices on metered or VPN-only connections may need a different deployment method.",
     "reasoningSteps": [
@@ -881,7 +1245,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule for Tonight"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Low",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "0 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Low risk to dependent services."
+    }
   },
   {
     "id": "rec-018",
@@ -894,9 +1268,21 @@
     "confidenceScore": "0.86",
     "confidenceLabel": "High",
     "dataSources": [
-      "BIOS/UEFI version reported by this device",
-      "Manufacturer firmware release notes for model ThinkPad-L14",
-      "Firmware version comparison across 1,647 similar devices"
+      {
+        "label": "BIOS/UEFI version reported by this device",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer firmware release notes for model ThinkPad-L14",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Firmware version comparison across 1,647 similar devices",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
     "reasoningSteps": [
@@ -933,7 +1319,17 @@
         "badgeColor": "error",
         "actionLabel": "Schedule Update"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T15:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Medium",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "5 mins",
+      "description": "Executing this workflow will cause temporary network isolation. Medium risk to dependent services."
+    }
   },
   {
     "id": "rec-019",
@@ -946,9 +1342,21 @@
     "confidenceScore": "0.88",
     "confidenceLabel": "High",
     "dataSources": [
-      "Disk usage telemetry for this device over the past 60 days",
-      "Fleet maintenance records covering 1,903 similar Laptop devices",
-      "Support ticket history from the last 12 months"
+      {
+        "label": "Disk usage telemetry for this device over the past 60 days",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"cpu_temp\": 95,\n  \"fan_rpm\": 0,\n  \"status\": \"critical\"\n}"
+      },
+      {
+        "label": "Fleet maintenance records covering 1,903 similar Laptop devices",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Support ticket history from the last 12 months",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "The cleanup estimate assumes typical user files and cached data. Devices with very large project files may need manual review before automatic cleanup.",
     "reasoningSteps": [
@@ -985,7 +1393,17 @@
         "badgeColor": "error",
         "actionLabel": "Notify User"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T11:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "High",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. High risk to dependent services."
+    }
   },
   {
     "id": "rec-020",
@@ -998,9 +1416,21 @@
     "confidenceScore": "0.57",
     "confidenceLabel": "Review",
     "dataSources": [
-      "BIOS/UEFI version reported by this device",
-      "Manufacturer firmware release notes for model ProLiant-DL380",
-      "Firmware version comparison across 1,647 similar devices"
+      {
+        "label": "BIOS/UEFI version reported by this device",
+        "syncTime": "2024-06-21T09:30:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Manufacturer firmware release notes for model ProLiant-DL380",
+        "syncTime": "2024-06-21T09:15:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      },
+      {
+        "label": "Firmware version comparison across 1,647 similar devices",
+        "syncTime": "2024-06-21T09:00:00.000Z",
+        "rawData": "{\n  \"status\": \"ok\",\n  \"latency\": \"12ms\"\n}"
+      }
     ],
     "knownLimitations": "Firmware updates require the device to stay powered and connected throughout the process. Laptops must be plugged into power to avoid interruption.",
     "reasoningSteps": [
@@ -1037,6 +1467,16 @@
         "badgeColor": "error",
         "actionLabel": "Schedule Update"
       }
-    ]
+    ],
+    "ttlExpiration": "2024-06-21T13:30:00.000Z",
+    "blastRadius": {
+      "impactLevel": "Critical",
+      "dependentSystems": [
+        "Active Directory Sync",
+        "Local File Share"
+      ],
+      "estimatedDowntime": "15+ mins",
+      "description": "Executing this workflow will cause temporary network isolation. Critical risk to dependent services."
+    }
   }
 ]
