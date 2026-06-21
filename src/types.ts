@@ -18,6 +18,7 @@ export interface Recommendation {
   title: string
   summary: string
   assetId: string
+  createdAt: string
   status: 'High Confidence' | 'Medium' | 'Review Recommended'
   category: 'MAINTENANCE_REQ' | 'CALIBRATION_REQ' | 'FIRMWARE_ALERT' | 'SECURITY_FLAG'
   confidenceScore: string

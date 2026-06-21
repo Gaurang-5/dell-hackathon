@@ -516,6 +516,7 @@ def make_recommendations(devices):
             "title": template["title"].format(**fmt),
             "summary": template["summary"].format(**fmt),
             "assetId": device["device_id"],
+            "createdAt": rand_past_datetime(14).isoformat(),
             "status": status,
             "category": category,
             "confidenceScore": confidence_score(status),
