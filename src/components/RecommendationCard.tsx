@@ -21,7 +21,7 @@ export function RecommendationCard({ recommendation, onActionComplete }: Recomme
   const categoryLabel = getCategoryLabel(recommendation.category)
 
   return (
-    <article className="rounded-lg p-6 transition-all duration-200 shadow-sm border border-slate-200 bg-white">
+    <article className="rounded-2xl p-8 transition-all duration-300 shadow-xl shadow-slate-200/50 ring-1 ring-slate-900/5 bg-white/80 backdrop-blur-xl">
       <header className="mb-4 flex flex-col justify-between gap-2 border-b border-slate-200 pb-4 sm:flex-row sm:items-center">
         <div className="flex items-center gap-2">
           <span className="text-base font-bold text-slate-900">

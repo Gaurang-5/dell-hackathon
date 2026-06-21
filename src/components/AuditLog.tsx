@@ -50,7 +50,7 @@ export function AuditLog({ logs }: AuditLogProps) {
   const [selectedLog, setSelectedLog] = useState<ActivityLogEntry | null>(null)
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden ring-1 ring-slate-900/5">
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left">
           <thead className="bg-slate-50 text-slate-600 font-medium border-b border-slate-200">

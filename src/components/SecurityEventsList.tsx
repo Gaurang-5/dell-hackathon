@@ -17,13 +17,13 @@ export function SecurityEventsList({ events }: SecurityEventsListProps) {
   return (
     <div className="flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-300">
       <header className="mb-2">
-        <h1 className="text-3xl font-bold text-slate-900">Security Events</h1>
-        <p className="mt-1 text-slate-600">
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Security Events</h1>
+        <p className="mt-2 text-slate-500 font-medium">
           Active anomalies and policy violations
         </p>
       </header>
 
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-xl shadow-xl shadow-slate-200/50 ring-1 ring-slate-900/5">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-slate-600">
             <thead className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">

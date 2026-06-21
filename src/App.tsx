@@ -36,53 +36,64 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex bg-slate-50 text-slate-900">
-      <aside className="w-64 bg-slate-900 border-r border-slate-800 text-white p-6 flex flex-col">
-        <div className="text-xl font-bold mb-8">AetherAI</div>
-        <nav className="space-y-2">
+    <div className="min-h-screen flex bg-slate-50/50 text-slate-900 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900">
+      <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-r border-slate-800 text-slate-300 p-6 flex flex-col shadow-2xl relative z-20">
+        <div className="text-2xl font-bold mb-10 tracking-tight text-white flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+            <ShieldAlert className="w-5 h-5 text-white" />
+          </div>
+          AetherAI
+        </div>
+        <nav className="space-y-1.5 font-medium text-sm">
           <button
             onClick={() => setCurrentView('dashboard')}
-            className={`w-full text-left block px-4 py-2 rounded ${
-              currentView === 'dashboard' ? 'bg-slate-700' : 'hover:bg-slate-800'
+            className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
+              currentView === 'dashboard' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
             }`}
           >
+            <Activity className="w-4 h-4" />
             Dashboard
           </button>
           <button
             onClick={() => setCurrentView('devices')}
-            className={`w-full text-left block px-4 py-2 rounded ${
-              currentView === 'devices' ? 'bg-slate-700' : 'hover:bg-slate-800'
+            className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
+              currentView === 'devices' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
             }`}
           >
+            <Laptop className="w-4 h-4" />
             Device Fleet
           </button>
           <button
             onClick={() => setCurrentView('events')}
-            className={`w-full text-left block px-4 py-2 rounded ${
-              currentView === 'events' ? 'bg-slate-700' : 'hover:bg-slate-800'
+            className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
+              currentView === 'events' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
             }`}
           >
+            <ShieldAlert className="w-4 h-4" />
             Security Events
           </button>
           <button
             onClick={() => setCurrentView('audit')}
-            className={`w-full text-left block px-4 py-2 rounded ${
-              currentView === 'audit' ? 'bg-slate-700' : 'hover:bg-slate-800'
+            className={`w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
+              currentView === 'audit' ? 'bg-indigo-500/10 text-indigo-400 font-semibold' : 'hover:bg-slate-800/50 hover:text-slate-100'
             }`}
           >
+            <Clock className="w-4 h-4" />
             Audit Log
           </button>
         </nav>
       </aside>
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 overflow-y-auto relative">
+        {/* Subtle background glow effect */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
         {currentView === 'dashboard' && (
           <>
-            <header className="mb-8">
-              <h1 className="text-3xl font-bold text-slate-900">
+            <header className="mb-10">
+              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
                 Needs Your Attention
               </h1>
-              <p className="mt-1 text-slate-600">
-                AI-flagged anomalies and required actions
+              <p className="mt-2 text-slate-500 font-medium">
+                AI-flagged anomalies and required actions across your fleet.
               </p>
             </header>
 
@@ -148,22 +159,27 @@ function App() {
                     <div
                       key={rec.id}
                       onClick={() => setSelectedRecId(rec.id)}
-                      className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 animate-fade-in-up hover:translate-x-1 ${
+                      className={`animate-fade-in-up cursor-pointer overflow-hidden rounded-xl border transition-all duration-300 ${
                         isSelected
-                          ? 'border-blue-500 bg-blue-50/50 shadow-sm'
-                          : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm'
+                          ? 'border-indigo-400 bg-white shadow-lg shadow-indigo-100 ring-1 ring-indigo-400/50 scale-[1.01]'
+                          : 'border-slate-200 bg-white hover:border-indigo-200 hover:shadow-md hover:-translate-y-0.5 opacity-80 hover:opacity-100'
                       }`}
-                      style={{ animationDelay: `${index * 75}ms` }}
+                      style={{ animationDelay: `${index * 75}ms`, animationFillMode: 'both' }}
                     >
-                      <div className="flex items-center gap-2 mb-2 text-sm text-slate-500">
-                        {getCompactAssetIcon(rec.assetId)}
-                        <span className="font-medium text-slate-700">{rec.assetId}</span>
-                      </div>
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-sm font-bold text-slate-900 line-clamp-2">
-                          {rec.title}
-                        </h3>
-                        <div className={`mt-1 h-2 w-2 shrink-0 rounded-full ${dotColor}`} title={`Confidence: ${rec.confidenceScore}`} />
+                      <div className="p-4 relative">
+                        {isSelected && (
+                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-indigo-500 rounded-l-xl" />
+                        )}
+                        <div className="flex items-center gap-2 mb-2 text-sm text-slate-500">
+                          {getCompactAssetIcon(rec.assetId)}
+                          <span className="font-medium text-slate-700">{rec.assetId}</span>
+                        </div>
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="text-sm font-bold text-slate-900 line-clamp-2">
+                            {rec.title}
+                          </h3>
+                          <div className={`mt-1 h-2 w-2 shrink-0 rounded-full ${dotColor}`} title={`Confidence: ${rec.confidenceScore}`} />
+                        </div>
                       </div>
                     </div>
                   )

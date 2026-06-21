@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AlertCircle, CheckCircle2, Play, ShieldAlert, X, MessageSquare, List } from 'lucide-react'
+import { AlertTriangle, CheckCircle2, Play, ShieldAlert, X, MessageSquare, GitBranch } from 'lucide-react'
 import type { RecommendationOption } from '../types'
 
 interface HumanControlsProps {
@@ -117,7 +117,7 @@ export function HumanControls({
           <button
             type="button"
             onClick={() => setPendingAction(primaryOption.actionLabel)}
-            className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-sm font-medium text-white hover:-translate-y-0.5 transition-transform shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 border-0"
+            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border-0"
           >
             <CheckCircle2 className="h-4 w-4" />
             {primaryOption.actionLabel}
@@ -130,9 +130,9 @@ export function HumanControls({
             setShowAskWhy(!showAskWhy)
             setShowAlternatives(false)
           }}
-          className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-1"
+          className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
         >
-          <MessageSquare className="h-4 w-4" />
+          <MessageSquare className="h-4 w-4 text-slate-400" />
           Ask Why
         </button>
 
@@ -143,9 +143,9 @@ export function HumanControls({
               setShowAlternatives(!showAlternatives)
               setShowAskWhy(false)
             }}
-            className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-1"
+            className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
           >
-            <List className="h-4 w-4" />
+            <GitBranch className="h-4 w-4 text-slate-400" />
             See Alternatives
           </button>
         )}
@@ -153,10 +153,10 @@ export function HumanControls({
         <button
           type="button"
           onClick={() => setPendingAction(ESCALATE_ACTION)}
-          className="inline-flex items-center gap-2 rounded-md border border-amber-300 bg-white px-4 py-2 text-sm font-medium text-amber-700 hover:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-1"
+          className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-white px-5 py-2.5 text-sm font-medium text-red-600 shadow-sm hover:border-red-300 hover:bg-red-50 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ml-auto"
         >
-          <AlertCircle className="h-4 w-4" />
-          {ESCALATE_ACTION}
+          <AlertTriangle className="h-4 w-4" />
+          Escalate
         </button>
       </div>
 
