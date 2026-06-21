@@ -1,31 +1,77 @@
+import 'dotenv/config'
 import express, { Request, Response } from 'express'
 import { createServer as createViteServer } from 'vite'
+import { HfInference } from '@huggingface/inference'
 import type { Recommendation } from './types'
 
-function fallbackExplainAnswer(
+const hf = new HfInference(process.env.HF_API_KEY)
+
+async function explainAnswerWithAI(
   recommendationTitle: string,
   contextText: string,
-  questionText: string
-): string {
-  const q = questionText.toLowerCase()
-  
-  if (q.includes('late') || q.includes('earlier') || q.includes('time')) {
-    return `We couldn't flag "${recommendationTitle}" earlier because the anomaly only surfaced in the past 24 hours. The telemetry readings were within normal limits until the last 3 sync cycles, at which point the deviation exceeded normal parameters. Acting now prevents an imminent failure.`
+  chatHistory: { role: 'user' | 'ai' | 'system'; text: string }[]
+): Promise<string> {
+  const systemPrompt = `You are a transparent IT Operations AI assistant.
+Your job is to answer the IT admin's specific questions about this recommendation.
+Context Data Used: ${contextText}
+Recommendation: ${recommendationTitle}
+CRITICAL RULES:
+- Do NOT repeat the exact same response or format.
+- Answer their specific question conversationally, clearly, and concisely.
+- Do NOT use ML jargon or probability terms. Keep it in plain English.
+- Do NOT copy previous AI messages.`
+
+  // Build an alternating user/assistant sequence (Llama-3 requires this)
+  const mappedHistory: { role: string; content: string }[] = []
+  let expectedRole = 'user'
+  for (const msg of chatHistory) {
+    if (!msg.text.trim()) continue
+    const role = msg.role === 'ai' ? 'assistant' : 'user'
+    if (role === expectedRole) {
+      mappedHistory.push({ role, content: msg.text })
+      expectedRole = expectedRole === 'user' ? 'assistant' : 'user'
+    } else if (mappedHistory.length > 0 && mappedHistory[mappedHistory.length - 1].role === role) {
+      // merge consecutive same-role messages
+      mappedHistory[mappedHistory.length - 1].content += '\n' + msg.text
+    }
   }
-  
-  if (q.includes('risk') || q.includes('impact') || q.includes('safe') || q.includes('danger')) {
-    return `The immediate risk needs attention because it could interrupt work during busy hours. The evidence comes from ${contextText}. The proposed action is designed to limit disruption, and no change starts until you approve it.`
+  // Drop a leading assistant message so conversation starts with user
+  if (mappedHistory.length > 0 && mappedHistory[0].role === 'assistant') mappedHistory.shift()
+
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    ...mappedHistory
+  ]
+
+  try {
+    if (!process.env.HF_API_KEY) {
+      throw new Error('No HF_API_KEY set')
+    }
+    const response = await hf.chatCompletion({
+      model: 'meta-llama/Llama-3.1-8B-Instruct',
+      messages: messages as any,
+      max_tokens: 300,
+      temperature: 0.7
+    })
+    return response.choices[0].message.content || 'I could not generate an explanation.'
+  } catch (err: any) {
+    console.error('AI Inference Error:', err)
+    // Intelligent fallback based on the latest user question
+    const lastUserMsg = chatHistory.filter(m => m.role === 'user').pop()?.text?.toLowerCase() || ''
+    if (lastUserMsg.includes('alternative') || lastUserMsg.includes('option') || lastUserMsg.includes('other')) {
+      return `Besides the primary recommendation, you could schedule the action for a later maintenance window to avoid disrupting the user during working hours. This keeps the risk contained but delays resolution.`
+    }
+    if (lastUserMsg.includes('delay') || lastUserMsg.includes('wait') || lastUserMsg.includes('later') || lastUserMsg.includes('days')) {
+      return `Delaying is possible, but each day without action increases the chance of disruption. If you must delay, scheduling it for tonight\'s maintenance window is the safest option.`
+    }
+    if (lastUserMsg.includes('risk') || lastUserMsg.includes('danger') || lastUserMsg.includes('impact')) {
+      return `The main risk is that the device could fail during working hours, impacting the user\'s productivity. The longer this is left unaddressed, the higher the chance of an unplanned outage.`
+    }
+    if (lastUserMsg.includes('fix') || lastUserMsg.includes('how') || lastUserMsg.includes('resolve')) {
+      return `The recommended fix is ready to apply. Once you approve it, the system will handle the update automatically. You can also schedule it for later if needed.`
+    }
+    return `Based on the available data, the recommendation for "${recommendationTitle}" stands. Multiple sources agree on the issue. Acting now is lower risk than waiting.`
   }
-  
-  if (q.includes('how') || q.includes('fix') || q.includes('resolve') || q.includes('do')) {
-    return `The recommended action for "${recommendationTitle}" is prepared for your review. If you approve it, the system will follow the listed steps and record your decision. You can also choose an alternative or override the recommendation.`
-  }
-  
-  if (q.includes('why') || q.includes('reason') || q.includes('explain')) {
-    return `The system found a consistent pattern across these sources: ${contextText}. Similar records in this simulated fleet were followed by device trouble, so reviewing the action now is safer than waiting for the issue to grow.`
-  }
-  
-  return `The recommendation "${recommendationTitle}" is based on ${contextText}. These records differ from the usual pattern for similar devices, so the system is asking a person to review the next step.`
 }
 
 function mockRecommendation(
@@ -134,15 +180,20 @@ async function startServer() {
       recommendationTitle = '',
       contextText = '',
       questionText,
+      chatHistory = []
     } = req.body
-    const question =
-      typeof questionText === 'string' && questionText.trim()
-        ? questionText.trim()
-        : 'Explain why this recommendation was made.'
+    
+    // Ensure the latest question is at least somewhere, or just use the whole history
+    const historyToUse = chatHistory.length > 0 ? chatHistory : [
+      { role: 'user', text: typeof questionText === 'string' && questionText.trim() ? questionText.trim() : 'Explain why this recommendation was made.' }
+    ]
 
-    return res.json({
-      answer: fallbackExplainAnswer(recommendationTitle, contextText, question),
-    })
+    try {
+      const answer = await explainAnswerWithAI(recommendationTitle, contextText, historyToUse)
+      return res.json({ answer })
+    } catch (e) {
+      return res.json({ answer: 'An error occurred while generating the explanation.' })
+    }
   })
 
   app.post('/api/simulate-recommendation', async (req: Request, res: Response) => {

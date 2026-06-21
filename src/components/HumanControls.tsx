@@ -44,7 +44,8 @@ export function HumanControls({
     if (!userText) return
     if (!text) setAskWhyInput('')
     
-    setChatHistory((prev) => [...prev, { role: 'user', text: userText }])
+    const updatedHistory = [...chatHistory, { role: 'user' as const, text: userText }]
+    setChatHistory(updatedHistory)
     setIsTyping(true)
     
     try {
@@ -54,7 +55,8 @@ export function HumanControls({
         body: JSON.stringify({
           recommendationTitle,
           contextText: dataSources.map(d => d.label).join(', '),
-          questionText: userText
+          questionText: userText,
+          chatHistory: updatedHistory
         })
       })
       const data = await response.json()

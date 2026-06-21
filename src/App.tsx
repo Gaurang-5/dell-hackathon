@@ -141,14 +141,20 @@ function App() {
         </header>
 
         {currentView === 'summary' && (
-          <div className="flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-300 w-full">
+          <div className="flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-300 max-w-[1400px] mx-auto w-full">
             <div className="glass-panel p-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
               <h2 className="text-3xl font-extrabold text-white mb-4 tracking-tight">Executive Overview</h2>
-              <p className="text-slate-300 text-lg leading-relaxed max-w-3xl relative z-10">
-                The organization's IT infrastructure is currently operating at a <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">94% Health Score</span>. 
-                Our proactive monitoring systems have identified <span className="text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">{activeRecommendations.length} potential issues</span> that require human review. 
-                All automated systems have been configured to require explicit IT administrator approval before taking any remediation actions, ensuring complete human oversight of the fleet.
+              <p className="text-slate-300 text-lg leading-relaxed max-w-5xl relative z-10">
+                The organization's IT infrastructure is currently operating at a{' '}
+                <span className="inline-flex items-center text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+                  94% Health Score
+                </span>
+                . Our proactive monitoring systems have identified{' '}
+                <span className="inline-flex items-center text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
+                  {activeRecommendations.length} potential issues
+                </span>{' '}
+                that require human review. All automated systems have been configured to require explicit IT administrator approval before taking any remediation actions, ensuring complete human oversight of the fleet.
               </p>
             </div>
             
@@ -180,7 +186,7 @@ function App() {
                     </div>
                   </div>
                   
-                  <div className="flex w-full justify-between px-4 text-sm bg-[#171427]/40 p-4 rounded-xl border border-white/5">
+                  <div className="flex w-full justify-center gap-12 px-4 text-sm bg-[#171427]/40 p-4 rounded-xl border border-white/5">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
                       <span className="text-slate-200 font-medium">Healthy</span>
