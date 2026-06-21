@@ -95,3 +95,56 @@ export function formatDate(isoString: string): string {
 
   return `${month} ${day}, ${year} at ${hour}:${minute} ${dayPeriod}`
 }
+
+export interface DataWeight {
+  label: string
+  percentage: number
+  colorClass: string
+}
+
+export function getDataWeighting(category: string, assetId: string): DataWeight[] {
+  let sum = 0
+  for (let i = 0; i < assetId.length; i++) {
+    sum += assetId.charCodeAt(i)
+  }
+  const seed = sum
+  
+  if (category === 'SECURITY_FLAG') {
+    const v1 = 45 + (seed % 12)
+    const v2 = 25 + (seed % 8)
+    return [
+      { label: 'Security Policy Rules', percentage: v1, colorClass: 'bg-indigo-500' },
+      { label: 'Fleet Incident History', percentage: v2, colorClass: 'bg-blue-400' },
+      { label: 'Device Telemetry', percentage: 100 - v1 - v2, colorClass: 'bg-slate-300' },
+    ]
+  }
+  
+  if (category === 'MAINTENANCE_REQ') {
+    const v1 = 55 + (seed % 15)
+    const v2 = 20 + (seed % 10)
+    return [
+      { label: 'Device Telemetry', percentage: v1, colorClass: 'bg-indigo-500' },
+      { label: 'Fleet Maintenance History', percentage: v2, colorClass: 'bg-blue-400' },
+      { label: 'Support Ticket Patterns', percentage: 100 - v1 - v2, colorClass: 'bg-slate-300' },
+    ]
+  }
+
+  if (category === 'FIRMWARE_ALERT') {
+    const v1 = 40 + (seed % 14)
+    const v2 = 35 + (seed % 9)
+    return [
+      { label: 'Manufacturer Guidelines', percentage: v1, colorClass: 'bg-indigo-500' },
+      { label: 'Device Telemetry', percentage: v2, colorClass: 'bg-blue-400' },
+      { label: 'Fleet History', percentage: 100 - v1 - v2, colorClass: 'bg-slate-300' },
+    ]
+  }
+
+  // CALIBRATION_REQ and fallback
+  const v1 = 60 + (seed % 11)
+  const v2 = 20 + (seed % 6)
+  return [
+    { label: 'Device Telemetry', percentage: v1, colorClass: 'bg-indigo-500' },
+    { label: 'Battery Analytics', percentage: v2, colorClass: 'bg-blue-400' },
+    { label: 'Manufacturer Guidelines', percentage: 100 - v1 - v2, colorClass: 'bg-slate-300' },
+  ]
+}

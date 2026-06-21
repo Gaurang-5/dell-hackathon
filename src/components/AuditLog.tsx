@@ -1,5 +1,6 @@
-
+import { useState } from 'react'
 import { ActivityLogEntry } from '../types'
+import { IncidentReportModal } from './IncidentReportModal'
 import { getConfidenceDisplay, formatDate } from '../utils/transparencyHelpers'
 import { Laptop, Server, Smartphone, Monitor, Shield, Settings } from 'lucide-react'
 
@@ -35,17 +36,19 @@ const mapConfidenceToScore = (confidence: string): number => {
 const getDecisionBadgeClass = (decision: string) => {
   switch (decision) {
     case 'Approved':
-      return 'bg-emerald-100 text-emerald-800 border-emerald-200'
+      return 'bg-emerald-50 text-emerald-700 border-emerald-200'
     case 'Overridden':
-      return 'bg-amber-100 text-amber-800 border-amber-200'
+      return 'bg-amber-50 text-amber-800 border-amber-200'
     case 'Escalated':
-      return 'bg-rose-100 text-rose-800 border-rose-200'
+      return 'bg-rose-50 text-rose-700 border-rose-200'
     default:
       return 'bg-slate-100 text-slate-800 border-slate-200'
   }
 }
 
 export function AuditLog({ logs }: AuditLogProps) {
+  const [selectedLog, setSelectedLog] = useState<ActivityLogEntry | null>(null)
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
       <div className="overflow-x-auto">
@@ -67,7 +70,7 @@ export function AuditLog({ logs }: AuditLogProps) {
               )
 
               return (
-                <tr key={log.id} className="hover:bg-slate-50/50">
+                <tr key={log.id} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-slate-500">
                     {formatDate(log.timestamp)}
                   </td>
@@ -89,13 +92,23 @@ export function AuditLog({ logs }: AuditLogProps) {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${getDecisionBadgeClass(
-                        log.humanDecision
-                      )}`}
-                    >
-                      {log.humanDecision}
-                    </span>
+                    <div className="flex flex-col gap-2 items-start">
+                      <span
+                        className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border ${getDecisionBadgeClass(
+                          log.humanDecision
+                        )}`}
+                      >
+                        {log.humanDecision}
+                      </span>
+                      {(log.humanDecision === 'Overridden' || log.humanDecision === 'Escalated') && (
+                        <button
+                          onClick={() => setSelectedLog(log)}
+                          className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 hover:underline"
+                        >
+                          View AI Incident Report
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               )
@@ -103,6 +116,13 @@ export function AuditLog({ logs }: AuditLogProps) {
           </tbody>
         </table>
       </div>
+
+      {selectedLog && (
+        <IncidentReportModal
+          log={selectedLog}
+          onClose={() => setSelectedLog(null)}
+        />
+      )}
     </div>
   )
 }

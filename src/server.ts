@@ -143,7 +143,11 @@ function mockRecommendation(
 }
 
 async function callMistral(prompt: string): Promise<string> {
-  const apiKey = process.env.HF_API_KEY
+  // Vite's loadEnv can grab the .env variables natively
+  const { loadEnv } = await import('vite')
+  const env = loadEnv('', process.cwd(), '')
+  const apiKey = env.HF_API_KEY || process.env.HF_API_KEY
+
   if (!apiKey) {
     throw new Error('HF_API_KEY not configured')
   }
@@ -184,8 +188,6 @@ async function startServer() {
     server: { middlewareMode: true },
     appType: 'spa',
   })
-  app.use(vite.middlewares)
-
   app.post('/api/explain-recommendation', async (req: Request, res: Response) => {
     const {
       recommendationTitle = '',
@@ -202,7 +204,8 @@ async function startServer() {
     try {
       const answer = await callMistral(prompt)
       return res.json({ answer })
-    } catch {
+    } catch (err) {
+      console.error(err)
       return res.json({
         answer: fallbackExplainAnswer(recommendationTitle, contextText, question),
       })
@@ -227,6 +230,7 @@ async function startServer() {
     }
   })
 
+  app.use(vite.middlewares)
   app.use(express.static('dist'))
   app.use('*', (_req: Request, res: Response) => {
     res.sendFile('dist/index.html', { root: process.cwd() })

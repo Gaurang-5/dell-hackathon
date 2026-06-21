@@ -1,12 +1,15 @@
 import securityEventsRaw from '../public/data/security_events.json'
 import recommendationsRaw from '../public/data/ai_recommendations.json'
 import auditLogRaw from '../public/data/audit_log.json'
+import devicesRaw from '../public/data/devices.json'
 
 import type {
   ActivityLogEntry,
   EscalationItem,
   Recommendation,
   SubsystemOverride,
+  Device,
+  SecurityEvent,
 } from './types'
 
 // Reference time for human-readable relative timestamps in the mocked dataset.
@@ -14,6 +17,10 @@ const MOCK_NOW = new Date('2024-06-21T09:30:00')
 
 export const initialRecommendations: Recommendation[] =
   recommendationsRaw as unknown as Recommendation[]
+
+export const initialDevices: Device[] = devicesRaw as unknown as Device[]
+
+export const initialSecurityEvents: SecurityEvent[] = securityEventsRaw as unknown as SecurityEvent[]
 
 export const initialActivityLogs: ActivityLogEntry[] = (auditLogRaw as unknown as any[]).map(
   (entry) => ({

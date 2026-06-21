@@ -57,3 +57,33 @@ export interface SubsystemOverride {
   level: number
   description: string
 }
+
+export interface Device {
+  device_id: string
+  device_name: string
+  os: string
+  department: string
+  assigned_user: string
+  last_seen: string
+  patch_compliance_pct: number
+  disk_usage_pct: number
+  ram_usage_pct: number
+  cpu_avg_7d: number
+  is_encrypted: boolean
+  last_patch_date: string
+  antivirus_status: 'active' | 'missing' | 'outdated'
+  fleet_segment: string
+}
+
+export interface SecurityEvent {
+  event_id: string
+  timestamp: string
+  device_id: string
+  device_name: string
+  event_type: string
+  severity: 'critical' | 'high' | 'medium' | 'low'
+  plain_description: string
+  process_name: string | null
+  resolved: boolean
+  resolution_action: string | null
+}
